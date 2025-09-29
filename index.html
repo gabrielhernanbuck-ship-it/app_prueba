@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+  <title>ArgenPay - Mockup Móvil</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="phone">
+    <!-- Header close X (some screens) -->
+    <button id="global-close" class="top-x hidden" aria-label="Cerrar">✕</button>
+
+    <!-- SCREEN A: Initial menu (used for img1 A, img2 A, img3 A looks similar) -->
+    <section id="screen-home" class="screen active" data-screen="home">
+      <div class="brand">
+        <div class="logo-pill">ARGEN-PAY</div>
+        <div class="powered">Powered By <strong>BANCO X</strong></div>
+      </div>
+
+      <div class="biometric">
+        <svg class="icon" viewBox="0 0 24 24" width="70" height="70">
+          <path fill="none" stroke="currentColor" stroke-width="1.5" d="M12 2v4M6 4v3M18 4v3M4 12h16M6 20v-3M18 20v-3M9 21h6" />
+        </svg>
+        <div class="biometric-text">Biometric Access</div>
+      </div>
+
+      <div class="actions">
+        <button id="btn-login" class="btn primary">LOG IN</button>
+        <button id="btn-signin" class="btn ghost">SING IN</button>
+        <button id="btn-cash" class="btn ghost">CASH IN/OUT</button>
+      </div>
+
+      <div class="version">Versión 1.0</div>
+    </section>
+
+    <!-- SCREEN img1-B: Language selection -->
+    <section id="screen-lang" class="screen" data-screen="lang">
+      <button class="top-x local-x" aria-label="Cerrar">✕</button>
+      <div class="brand small">
+        <div class="logo-pill">ARGEN-PAY</div>
+      </div>
+
+      <h3 class="center">Choose a language to continue...</h3>
+      <div class="lang-list">
+        <button class="btn lang">ENGLISH</button>
+        <button class="btn lang">SPANISH</button>
+        <button class="btn lang">PORTUGUESE</button>
+        <button class="btn lang">FRENCH</button>
+      </div>
+
+      <div class="version">Versión 1.0</div>
+    </section>
+
+    <!-- SCREEN img1-C: Info form (only dates and checkbox active) -->
+    <section id="screen-info" class="screen" data-screen="info">
+      <button class="top-x local-x" aria-label="Cerrar">✕</button>
+      <div class="brand small">
+        <div class="logo-pill">Welcome to ARGENPAY!</div>
+        <div class="sub">The best way to pay in Buenos Aires.</div>
+      </div>
+
+      <div class="card info-card">
+        <p class="muted">We'll need some information to continue...</p>
+
+        <div class="form-row">
+          <label>Enter your arrival and departure dates to Argentina:</label>
+          <div class="date-row">
+            <input type="date" id="date-from">
+            <input type="date" id="date-to">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <button id="show-terms" class="btn ghost small">Show Terms</button>
+          <label class="checkbox">
+            <input type="checkbox" id="agree">
+            <span> I understand and accept.</span>
+          </label>
+        </div>
+
+        <div class="row-between">
+          <button id="go-back-from-info" class="btn ghost small"> &lt; GO BACK</button>
+          <button id="continue-from-info" class="btn primary small">CONTINUE &gt;</button>
+        </div>
+      </div>
+
+      <div class="version">Versión 1.0</div>
+    </section>
+
+    <!-- SCREEN img1-D: Upload success -->
+    <section id="screen-success" class="screen" data-screen="success">
+      <button class="top-x local-x" aria-label="Cerrar">✕</button>
+      <div class="success-wrap">
+        <div class="success-pill">Congratulations, your information has been uploaded successfully!</div>
+        <div class="tick">
+          <svg viewBox="0 0 64 64" width="120" height="120">
+            <circle cx="32" cy="32" r="30" fill="#eaf2ff"/>
+            <path d="M18 34l8 8 20-20" stroke="#1866ff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <p class="muted">We'll send you a notification when your profile is active and your account is ready to receive funds.</p>
+      </div>
+      <div class="version">Versión 1.0</div>
+    </section>
+
+    <!-- SCREEN img3-B: Account Balance -->
+    <section id="screen-account" class="screen" data-screen="account">
+      <button class="top-x local-x" aria-label="Cerrar">✕</button>
+      <div class="brand small">
+        <div class="logo-pill">ARGEN-PAY</div>
+      </div>
+
+      <div class="profile-row">
+        <div class="profile-pill">Profile <span class="avatar">👤</span></div>
+      </div>
+
+      <div class="balances card">
+        <div class="balance-line">
+          <small>Account Balance</small>
+          <div class="value large">USD <span>500.00</span></div>
+          <div class="value small">ARS <span>685,000.00</span></div>
+        </div>
+
+        <div class="actions-col">
+          <button id="btn-promomap" class="btn ghost block">PROMOTIONS MAP</button>
+          <button id="btn-history" class="btn ghost block">PAYMENT HISTORY</button>
+          <button id="btn-qr" class="btn primary block">QR SCANNER</button>
+        </div>
+      </div>
+
+      <div class="version">Versión 1.0</div>
+    </section>
+
+    <!-- SCREEN img3-C: Movement History (scrollable) -->
+    <section id="screen-history" class="screen" data-screen="history">
+      <button class="top-x local-x" aria-label="Cerrar">✕</button>
+
+      <div class="brand small">
+        <div class="logo-pill">ARGEN-PAY</div>
+      </div>
+
+      <h3 class="center">Movement History</h3>
+
+      <div class="history-list card scrollable">
+        <!-- multiple items to allow scrolling -->
+        <div class="history-item">
+          <div class="h-left">
+            <small>17/08/2025 - Debit</small>
+            <div class="amount">ARS <strong>30,000</strong></div>
+          </div>
+          <div class="h-right">USD <strong>22.67</strong></div>
+        </div>
+        <div class="history-item">
+          <div class="h-left">
+            <small>15/08/2025 - Debit</small>
+            <div class="amount">ARS <strong>50,000</strong></div>
+          </div>
+          <div class="h-right">USD <strong>37.78</strong></div>
+        </div>
+        <!-- repeat to enable scroll -->
+        <div class="history-item">
+          <div class="h-left">
+            <small>10/08/2025 - Credit</small>
+            <div class="amount">ARS <strong>15,000</strong></div>
+          </div>
+          <div class="h-right">USD <strong>11.34</strong></div>
+        </div>
+        <div style="height:18px"></div>
+      </div>
+
+      <div class="center">
+        <button id="return-main-from-history" class="btn ghost">RETURN TO MAIN MENU</button>
+      </div>
+
+      <div class="version">Versión 1.0</div>
+    </section>
+
+    <!-- SCREEN img3-D: Promotions Map (simulated, scrollable) -->
+    <section id="screen-map" class="screen" data-screen="map">
+      <button class="top-x local-x" aria-label="Cerrar">✕</button>
+
+      <div class="brand small">
+        <div class="logo-pill">ARGEN-PAY</div>
+      </div>
+
+      <h3 class="center">PROMOTIONS MAP</h3>
+
+      <div class="map-card card scrollable-map" tabindex="0" aria-label="Mapa de promociones">
+        <!-- simulated map: a wide area you can scroll horizontally + markers -->
+        <div class="map-area">
+          <!-- markers -->
+          <div class="marker" style="left:20%; top:30%"><span>☕</span></div>
+          <div class="marker" style="left:45%; top:45%"><span>📚</span></div>
+          <div class="marker" style="left:70%; top:25%"><span>🛍️</span></div>
+        </div>
+      </div>
+
+      <div class="promos-list">
+        <div class="promo card small">
+          <strong>Café: "Las Violetas"</strong>
+          <div class="muted">10% OFF</div>
+        </div>
+        <div class="promo card small">
+          <strong>Bookshop: "El Ateneo"</strong>
+          <div class="muted">20% OFF</div>
+        </div>
+      </div>
+
+      <div class="version">Versión 1.0</div>
+    </section>
+
+    <!-- SCREEN img2-B: Cash In/Out Transaction Details -->
+    <section id="screen-cash" class="screen" data-screen="cash">
+      <button class="top-x local-x" aria-label="Cerrar">✕</button>
+      <div class="brand small">
+        <div class="logo-pill">ARGEN-PAY</div>
+      </div>
+
+      <h3 class="center">Transaction Details</h3>
+
+      <div class="card details-card">
+        <p><strong>Beneficiary:</strong> Josh Smith</p>
+        <p><strong>Account Number:</strong> XXXXXX</p>
+        <p><strong>Country:</strong> Argentina</p>
+        <p><strong>Bank Name:</strong> Banco X</p>
+        <p><strong>SWIFT Code:</strong> BACOARBA</p>
+        <p><strong>Sucursal N°:</strong> 999</p>
+      </div>
+
+      <div class="actions-col">
+        <button id="share-details" class="btn ghost block">SHARE DETAILS</button>
+        <button id="rescue-order" class="btn primary block">RESCUE ORDER</button>
+      </div>
+
+      <div class="version">Versión 1.0</div>
+    </section>
+
+    <!-- Modals -->
+    <div id="modal-backdrop" class="modal-backdrop hidden"></div>
+
+    <div id="modal-qr" class="modal hidden" role="dialog" aria-modal="true">
+      <button class="modal-close" data-modal-close>✕</button>
+      <div class="modal-content">
+        <div class="camera-icon">
+          <svg viewBox="0 0 24 24" width="60" height="60">
+            <path d="M3 7h3l2-2h6l2 2h3v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" fill="#fff" />
+            <circle cx="12" cy="12" r="3" stroke="#1866ff" stroke-width="1.5" fill="#eef5ff"/>
+          </svg>
+        </div>
+        <h3>Cámara activada</h3>
+        <p class="muted">La cámara está simulada en esta demo.</p>
+      </div>
+    </div>
+
+    <div id="modal-share" class="modal hidden" role="dialog" aria-modal="true">
+      <button class="modal-close" data-modal-close>✕</button>
+      <div class="modal-content">
+        <h3>Descargando PDF</h3>
+        <p>Descargando el PDF para compartir con su banco de origen, los datos para la transferencia.</p>
+      </div>
+    </div>
+
+    <div id="modal-rescue" class="modal hidden" role="dialog" aria-modal="true">
+      <button class="modal-close" data-modal-close>✕</button>
+      <div class="modal-content">
+        <h3>Orden emitida</h3>
+        <p>Se ha emitido una orden para que el dinero en la APP regrese a su banco de origen y luego la cuenta se cierre. La operación puede demorar hasta 48hs hábiles.</p>
+      </div>
+    </div>
+
+  </div>
+
+<script>
+/* SPA navigation logic */
+(function(){
+  const screens = {
+    home: document.getElementById('screen-home'),
+    lang: document.getElementById('screen-lang'),
+    info: document.getElementById('screen-info'),
+    success: document.getElementById('screen-success'),
+    account: document.getElementById('screen-account'),
+    history: document.getElementById('screen-history'),
+    map: document.getElementById('screen-map'),
+    cash: document.getElementById('screen-cash')
+  };
+
+  function show(screenId){
+    // hide all
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    // show target
+    const target = screens[screenId];
+    if(target) target.classList.add('active');
+    // manage close X global visibility: only show on screens that have it
+    document.getElementById('global-close').classList.toggle('hidden', screenId === 'home');
+  }
+
+  // Initial
+  show('home');
+
+  // Home buttons
+  document.getElementById('btn-signin').addEventListener('click', () => show('lang'));
+  document.getElementById('btn-login').addEventListener('click', () => show('account'));
+  document.getElementById('btn-cash').addEventListener('click', () => show('cash'));
+
+  // Local top-x close buttons (in many screens)
+  document.querySelectorAll('.local-x').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      // find current screen to decide behavior
+      const parentSection = e.currentTarget.closest('.screen');
+      if(parentSection === screens.lang) show('home');
+      else if(parentSection === screens.info) show('lang');
+      else if(parentSection === screens.success) show('home');
+      else if(parentSection === screens.account) show('home');
+      else if(parentSection === screens.history) show('account');
+      else if(parentSection === screens.map) show('account');
+      else if(parentSection === screens.cash) show('home');
+      else show('home');
+    });
+  });
+
+  // Language buttons -> info screen
+  document.querySelectorAll('.btn.lang').forEach(b => {
+    b.addEventListener('click', () => show('info'));
+  });
+
+  // Screen info: GO BACK and CONTINUE
+  document.getElementById('go-back-from-info').addEventListener('click', () => show('lang'));
+  document.getElementById('continue-from-info').addEventListener('click', () => {
+    // only allow continue even if checkbox/dates not filled per spec (they asked Continue to go to D)
+    show('success');
+  });
+
+  // In success screen X should go to home: handled by local-x
+
+  // Account screen actions
+  document.getElementById('btn-promomap').addEventListener('click', () => show('map'));
+  document.getElementById('btn-history').addEventListener('click', () => show('history'));
+  document.getElementById('btn-qr').addEventListener('click', () => openModal('modal-qr'));
+
+  // History -> return
+  document.getElementById('return-main-from-history').addEventListener('click', () => show('account'));
+
+  // Cash actions
+  document.getElementById('share-details').addEventListener('click', () => openModal('modal-share'));
+  document.getElementById('rescue-order').addEventListener('click', () => openModal('modal-rescue'));
+
+  // Global modal handling
+  const backdrop = document.getElementById('modal-backdrop');
+  function openModal(id){
+    backdrop.classList.remove('hidden');
+    document.getElementById(id).classList.remove('hidden');
+  }
+  function closeModals(){
+    backdrop.classList.add('hidden');
+    document.querySelectorAll('.modal').forEach(m => m.classList.add('hidden'));
+  }
+  // close buttons
+  document.querySelectorAll('[data-modal-close]').forEach(b => b.addEventListener('click', closeModals));
+  backdrop.addEventListener('click', closeModals);
+
+  // Local rule: Only date inputs and checkbox in info are interactive; other buttons in that screen are inert.
+  // (Already implemented: Show Terms is inert except it is a button - we leave it non-functional.)
+  // For accessibility, prevent form submission with enter
+  document.querySelectorAll('input[type="date"]').forEach(i => {
+    i.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter') e.preventDefault();
+    });
+  });
+
+  // small enhancement: keyboard ESC closes modals or goes back to home
+  window.addEventListener('keydown', (ev) => {
+    if(ev.key === 'Escape'){
+      // if modal open -> close
+      if(!backdrop.classList.contains('hidden')) closeModals();
+      else {
+        // if not in home, go home
+        const active = document.querySelector('.screen.active');
+        if(active && active.id !== 'screen-home') show('home');
+      }
+    }
+  });
+
+})();
+</script>
+</body>
+</html>
