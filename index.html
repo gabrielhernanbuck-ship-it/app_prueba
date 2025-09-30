@@ -1,280 +1,93 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
-  <title>ARGEN-PAY — Prototipo (Mobile)</title>
-  <link rel="stylesheet" href="styles.css">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Banco - Promociones</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="viewport">
-    <header class="topbar">
-      <div class="brand">ARGEN-PAY</div>
-      <div class="top-actions">
-        <button class="icon-btn" id="closeApp" title="Cerrar">✕</button>
-      </div>
-    </header>
-
-    <main class="screens">
-      <!-- Home / Login -->
-      <section id="home" class="screen active">
-        <div class="hero card">
-          <div class="brand-badge">ARGEN-PAY</div>
-          <div class="powered">Powered by BANCO X</div>
-          <div class="biometric">
-            <i class="fa-regular fa-fingerprint fa-3x"></i>
-            <div class="biotext">Biometric Access</div>
-          </div>
-        </div>
-
-        <nav class="actions">
-          <button class="btn primary" data-to="account">LOG IN</button>
-          <button class="btn ghost" data-to="language">SING IN</button>
-          <button class="btn ghost" data-to="cash">CASH IN/OUT</button>
-        </nav>
-
-        <div class="footer-text">Versión 1.0</div>
-      </section>
-
-      <!-- Language -->
-      <section id="language" class="screen">
-        <div class="card">
-          <div class="brand-badge">ARGEN-PAY</div>
-          <h3>Elija un idioma para continuar...</h3>
-          <div class="langs">
-            <button class="btn ghost" data-to="onboard">INGLÉS</button>
-            <button class="btn ghost" data-to="onboard">ESPAÑOL</button>
-            <button class="btn ghost" data-to="onboard">PORTUGUÉS</button>
-            <button class="btn ghost" data-to="onboard">FRANCÉS</button>
-          </div>
-        </div>
-      </section>
-
-      <!-- Onboarding / KYC -->
-      <section id="onboard" class="screen">
-        <div class="card">
-          <h4>Bienvenido a ARGENPAY!</h4>
-          <p class="muted">Vamos a necesitar algo de información para continuar.</p>
-
-          <form id="kycForm">
-            <label>Correo electrónico</label>
-            <input type="email" placeholder="ingresar correo electrónico" required>
-
-            <label>Teléfono</label>
-            <input type="tel" placeholder="ingresar teléfono" required>
-
-            <label>Escanear Documento</label>
-            <div class="row">
-              <button type="button" class="btn ghost small" id="scanDoc">Escanear Documento</button>
-            </div>
-
-            <label>Moneda</label>
-            <div class="row">
-              <button type="button" class="btn ghost small" data-currency> DÓLAR </button>
-              <button type="button" class="btn ghost small" data-currency> EURO </button>
-            </div>
-
-            <label>Fechas (ingreso / salida)</label>
-            <div class="row">
-              <input type="text" placeholder="dd/mm/yyyy">
-              <input type="text" placeholder="dd/mm/yyyy">
-            </div>
-
-            <div class="form-check">
-              <input type="checkbox" id="terms">
-              <label for="terms">Entiendo y acepto. <a href="#">Leer Términos</a></label>
-            </div>
-
-            <div class="row buttons">
-              <button type="button" class="btn light" data-to="language">&lt; VOLVER</button>
-              <button type="submit" class="btn primary">CONTINUAR</button>
-            </div>
-          </form>
-        </div>
-      </section>
-
-      <!-- Success -->
-      <section id="success" class="screen">
-        <div class="card center">
-          <i class="fa-solid fa-circle-check fa-3x success-ico"></i>
-          <h4>¡Felicidades!</h4>
-          <p>Su información ha sido cargada exitosamente! Le enviaremos una notificación cuando su perfil esté activo.</p>
-        </div>
-      </section>
-
-      <!-- Cash / SWIFT -->
-      <section id="cash" class="screen">
-        <div class="card">
-          <h5>Datos Bancarios</h5>
-          <div class="swift-box">
-            <div><strong>Beneficiary:</strong> Josh Smith</div>
-            <div><strong>Account Number:</strong> XXXXXX</div>
-            <div><strong>Country:</strong> Argentina</div>
-            <div><strong>Bank Name:</strong> Banco X</div>
-            <div><strong>SWIFT Code:</strong> BACOARBA</div>
-            <div><strong>Sucursal N°:</strong> 999</div>
-          </div>
-
-          <div class="row promo-actions">
-            <button class="btn ghost small" id="shareDetails"><i class="fa-solid fa-file-arrow-down"></i> SHARE DETAILS</button>
-            <button class="btn ghost small" id="rescueOrder"><i class="fa-solid fa-life-ring"></i> RESCUE ORDER</button>
-          </div>
-        </div>
-      </section>
-
-      <!-- Account / Dashboard -->
-      <section id="account" class="screen">
-        <div class="card">
-          <div class="account-header">
-            <div>
-              <div class="brand-badge small">ARGEN-PAY</div>
-              <div class="muted">Balance de Cuenta</div>
-            </div>
-            <div class="profile-pill">Perfil <i class="fa-regular fa-circle-user"></i></div>
-          </div>
-
-          <div class="balances">
-            <div class="usd">USD <span class="amount">500.00</span></div>
-            <div class="ars">ARS <span class="amount">685,000.00</span></div>
-          </div>
-
-          <div class="menu">
-            <button class="btn ghost" data-to="map">MAPA DE PROMOCIONES</button>
-            <button class="btn ghost" data-to="history">HISTORIAL DE PAGOS</button>
-            <button class="btn ghost" id="openQr">QR SCANNER</button>
-          </div>
-        </div>
-      </section>
-
-      <!-- History -->
-      <section id="history" class="screen">
-        <div class="card">
-          <h5>Historial de Movimientos</h5>
-          <div class="history-list">
-            <div class="txn">
-              <div>
-                <div class="title">17/08/2025 - Debit</div>
-                <div class="muted">Compra - Supermercado</div>
-              </div>
-              <div class="right">
-                <div class="amount">ARS 30,000</div>
-                <div class="muted">USD 22.67</div>
-              </div>
-            </div>
-
-            <div class="txn">
-              <div>
-                <div class="title">15/08/2025 - Debit</div>
-                <div class="muted">Carga de saldo</div>
-              </div>
-              <div class="right">
-                <div class="amount">ARS 50,000</div>
-                <div class="muted">USD 37.78</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="center"><button class="btn light" data-to="account">RETURN TO MAIN MENU</button></div>
-        </div>
-      </section>
-
-      <!-- Map (static image + interactive pins) -->
-      <section id="map" class="screen">
-        <div class="card">
-          <h5>MAPA DE PROMOCIONES</h5>
-          <div class="map-wrap">
-            <img src="map-static.jpg" alt="Mapa Ciudad" class="map-img" id="mapImg">
-            <!-- pins (positioned absolutely over the image) -->
-            <button class="pin" style="left:62%;top:28%" data-title="El Ateneo" data-desc="10% OFF">📍</button>
-            <button class="pin" style="left:48%;top:45%" data-title="Jardín Japonés" data-desc="15% OFF">📍</button>
-            <button class="pin" style="left:60%;top:32%" data-title="Teatro Colón" data-desc="20% OFF">📍</button>
-            <button class="pin" style="left:36%;top:50%" data-title="Las Violetas" data-desc="20% OFF">📍</button>
-          </div>
-
-          <div class="promo-list" id="promoList"></div>
-        </div>
-      </section>
-
-    </main>
-
-    <!-- bottom tabs -->
-    <nav class="tabs">
-      <button class="tab active" data-to="home"><i class="fa-solid fa-house"></i><span>Inicio</span></button>
-      <button class="tab" data-to="map"><i class="fa-solid fa-map-marker-alt"></i><span>Promos</span></button>
-      <button class="tab" data-to="history"><i class="fa-solid fa-clock-rotate-left"></i><span>Historial</span></button>
-      <button class="tab" data-to="account"><i class="fa-solid fa-wallet"></i><span>Cuenta</span></button>
+  <header>
+    <h1>Banco Digital</h1>
+    <nav>
+      <ul>
+        <li><a href="#home" class="nav-link active">Inicio</a></li>
+        <li><a href="#promos" class="nav-link">Promociones</a></li>
+        <li><a href="#contacto" class="nav-link">Contacto</a></li>
+      </ul>
     </nav>
+  </header>
 
-  </div>
+  <main>
+    <!-- Sección Inicio -->
+    <section id="home" class="page active">
+      <h2>Bienvenido a tu Banco</h2>
+      <p>Gestiona tus cuentas, promociones y beneficios desde un solo lugar.</p>
+    </section>
 
-  <!-- simple modals -->
-  <div id="tooltip" class="tooltip" style="display:none">
-    <div class="tooltip-card">
-      <div class="t-title"></div>
-      <div class="t-desc muted"></div>
-      <div class="t-actions"><button class="btn light" id="tClose">Cerrar</button></div>
-    </div>
-  </div>
+    <!-- Sección Promociones -->
+    <section id="promos" class="page">
+      <h2>Mapa de Promociones</h2>
+      <div class="mapa">
+        <div class="promo-card">
+          <h3>Descuento en Restaurantes</h3>
+          <p>20% de descuento con tu tarjeta de crédito.</p>
+        </div>
+        <div class="promo-card">
+          <h3>Combustible</h3>
+          <p>10% de reintegro todos los martes.</p>
+        </div>
+        <div class="promo-card">
+          <h3>Electrónica</h3>
+          <p>12 cuotas sin interés en tiendas seleccionadas.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección Contacto -->
+    <section id="contacto" class="page">
+      <h2>Contacto</h2>
+      <form>
+        <label>Nombre</label>
+        <input type="text" placeholder="Tu nombre" required />
+        <label>Email</label>
+        <input type="email" placeholder="tu@email.com" required />
+        <label>Mensaje</label>
+        <textarea placeholder="Escribí tu mensaje..."></textarea>
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Banco Digital. Todos los derechos reservados.</p>
+  </footer>
 
   <script>
-    // SPA navigation (tabs + buttons)
-    function showScreen(id){
-      document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-      const tab = document.querySelector(`.tab[data-to='${id}']`);
-      if(tab) tab.classList.add('active');
-    }
+    // Navegación SPA simple con transición
+    const links = document.querySelectorAll('.nav-link');
+    const pages = document.querySelectorAll('.page');
 
-    document.addEventListener('click', e=>{
-      const to = e.target.closest('[data-to]');
-      if(to){ showScreen(to.getAttribute('data-to')); }
+    links.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        links.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
 
-      // pins
-      if(e.target.classList.contains('pin')){
-        const title = e.target.getAttribute('data-title');
-        const desc = e.target.getAttribute('data-desc');
-        showTooltip(title, desc);
-      }
+        const target = link.getAttribute('href').substring(1);
+        pages.forEach(page => {
+          page.classList.remove('active');
+          if (page.id === target) {
+            page.classList.add('active');
+          }
+        });
+      });
     });
-
-    // tabs
-    document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click', ()=> showScreen(t.getAttribute('data-to'))));
-
-    // KYC form
-    document.getElementById('kycForm').addEventListener('submit', e=>{ e.preventDefault(); showScreen('success'); });
-
-    // promo list from pins
-    const pins = Array.from(document.querySelectorAll('.pin')).map(p=>({title:p.dataset.title,desc:p.dataset.desc}));
-    const promoList = document.getElementById('promoList');
-    pins.forEach(p=>{
-      const el = document.createElement('div'); el.className='promo-item'; el.innerHTML = `<div><strong>${p.title}</strong><div class='muted'>${p.desc}</div></div><button class='btn small' onclick="showScreen('map')">Ver</button>`;
-      promoList.appendChild(el);
-    });
-
-    // tooltip modal
-    function showTooltip(title,desc){
-      const tip = document.getElementById('tooltip');
-      tip.style.display='flex';
-      tip.querySelector('.t-title').innerText = title;
-      tip.querySelector('.t-desc').innerText = desc;
-    }
-    document.getElementById('tClose').addEventListener('click', ()=>{ document.getElementById('tooltip').style.display='none'; });
-
-    // simple camera / qr simulation
-    document.getElementById('scanDoc').addEventListener('click', ()=> alert('Cámara simulada para escanear documento'));
-    document.getElementById('openQr').addEventListener('click', ()=> alert('Simulación: Cámara habilitada para escanear QR'));
-
-    // share / rescue
-    document.getElementById('shareDetails').addEventListener('click', ()=> alert('Descargando PDF con los datos. (Simulado)'));
-    document.getElementById('rescueOrder').addEventListener('click', ()=> alert('Sus fondos serán transferidos al banco de origen. (Simulado)'));
-
-    // initial view
-    showScreen('home');
   </script>
 </body>
 </html>
+
+
 
 
 
