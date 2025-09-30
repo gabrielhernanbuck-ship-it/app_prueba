@@ -1,400 +1,277 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>ARGEN-PAY — Prototipo Móvil (SPA)</title>
-
-  <!-- Bootstrap 5 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>ARGEN-PAY — Prototipo (Mobile)</title>
+  <link rel="stylesheet" href="styles.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-  <!-- Leaflet (mapa) -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-
-  <style>
-    :root{
-      --brand:#0c45ff; /* deep fintech blue */
-      --muted:#e9edf9;
-      --card:#ffffff;
-      --glass: rgba(255,255,255,0.85);
-      --shadow: 0 6px 18px rgba(11,30,80,0.12);
-      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-    }
-
-    /* phone frame */
-    body{background: linear-gradient(180deg,#f6f8ff 0%, #ffffff 100%);display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
-    .phone{width:380px;max-width:92vw;height:800px;background:linear-gradient(180deg,#fff,#f8f9ff);border-radius:34px;padding:18px;box-shadow:0 30px 60px rgba(12,45,100,0.12);position:relative;overflow:hidden}
-    .notch{height:30px;display:block;margin:0 auto;width:60%;max-width:220px;text-align:center;color:rgba(0,0,0,0.2);font-weight:600}
-
-    /* app container */
-    .app{height:calc(100% - 40px);overflow:hidden;position:relative}
-    .screen{position:absolute;inset:0;padding:18px;display:flex;flex-direction:column;gap:12px;transform:translateX(120%);opacity:0;transition:all .45s cubic-bezier(.2,.9,.3,1)}
-    .screen.active{transform:translateX(0%);opacity:1}
-    .screen.left{transform:translateX(-120%)}
-
-    /* header */
-    .brand{background:var(--brand);color:white;padding:10px 18px;border-radius:12px;display:inline-block;font-weight:700;letter-spacing:1px}
-    .subtitle{font-size:12px;color:rgba(0,0,0,.45)}
-
-    /* hero & buttons */
-    .hero{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;margin-top:6vh}
-    .big-btn{width:100%;padding:12px;border-radius:10px;background:var(--brand);color:white;font-weight:700;box-shadow:var(--shadow);border:0}
-    .ghost{background:linear-gradient(180deg,var(--muted),#eef2ff);color:#122;box-shadow:none;border:0}
-
-    /* cards */
-    .cardish{background:var(--card);padding:12px;border-radius:14px;box-shadow:var(--shadow)}
-
-    /* balance */
-    .balance{display:flex;flex-direction:column;gap:4px;align-items:center}
-    .big-amt{font-size:28px;font-weight:700}
-    .small-amt{font-size:12px;color:rgba(0,0,0,.45)}
-
-    /* list buttons */
-    .menu-list{display:flex;flex-direction:column;gap:10px}
-    .menu-item{padding:10px;border-radius:10px;border:1px solid rgba(11,30,80,0.04);display:flex;justify-content:space-between;align-items:center}
-
-    /* history */
-    .history{overflow:auto;height:55vh;padding:6px}
-    .txn{display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:10px;border:1px solid rgba(11,30,80,0.04);margin-bottom:8px}
-
-    /* map */
-    #map{height:52vh;border-radius:12px;overflow:hidden}
-    .promo-list{max-height:26vh;overflow:auto}
-
-    /* form */
-    .form-control:focus{box-shadow:none;border-color:var(--brand)}
-
-    /* small helper */
-    .pill{background:var(--muted);padding:6px 8px;border-radius:8px;font-weight:600}
-
-    /* animations */
-    .fade-in{animation:fadeIn .45s both}
-    @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-
-    /* responsive tweaks (for small screens) */
-    @media (max-width:380px){.phone{height:90vh}}
-
-    footer.version{position:absolute;bottom:8px;left:12px;font-size:11px;color:rgba(0,0,0,.25)}
-  </style>
 </head>
 <body>
-  <div class="phone">
-    <div class="notch">● ● ●</div>
-    <div class="app">
+  <div class="viewport">
+    <header class="topbar">
+      <div class="brand">ARGEN-PAY</div>
+      <div class="top-actions">
+        <button class="icon-btn" id="closeApp" title="Cerrar">✕</button>
+      </div>
+    </header>
 
-      <!-- Screen: Welcome / Login -->
-      <section id="screen-home" class="screen active">
-        <div>
-          <div class="brand">ARGEN-PAY</div>
-          <div class="subtitle">Powered by BANCO X</div>
-        </div>
-
-        <div class="hero">
-          <div class="cardish" style="width:85%;text-align:center">
-            <i class="fa-regular fa-face-smile-hearts fa-2x" style="color:var(--brand)"></i>
-            <div style="font-weight:700;margin-top:8px">Biometric Access</div>
-            <div style="font-size:12px;color:rgba(0,0,0,.45)">Touch to authenticate</div>
+    <main class="screens">
+      <!-- Home / Login -->
+      <section id="home" class="screen active">
+        <div class="hero card">
+          <div class="brand-badge">ARGEN-PAY</div>
+          <div class="powered">Powered by BANCO X</div>
+          <div class="biometric">
+            <i class="fa-regular fa-fingerprint fa-3x"></i>
+            <div class="biotext">Biometric Access</div>
           </div>
-
-          <button class="big-btn" onclick="goTo('screen-account')">LOG IN</button>
-          <button class="big-btn ghost" onclick="goTo('screen-language')">SING IN</button>
-          <button class="big-btn ghost" onclick="goTo('screen-cash')">CASH IN/OUT</button>
         </div>
 
-        <footer class="version">Versión 1.0</footer>
+        <nav class="actions">
+          <button class="btn primary" data-to="account">LOG IN</button>
+          <button class="btn ghost" data-to="language">SING IN</button>
+          <button class="btn ghost" data-to="cash">CASH IN/OUT</button>
+        </nav>
+
+        <div class="footer-text">Versión 1.0</div>
       </section>
 
-      <!-- Screen: Cash / SWIFT details -->
-      <section id="screen-cash" class="screen">
-        <div>
-          <div class="brand">ARGEN-PAY</div>
-          <div class="cardish" style="margin-top:12px">
-            <h6 style="margin:0">Datos Bancarios:</h6>
-            <div style="border:2px solid rgba(12,69,255,0.15);padding:8px;border-radius:8px;margin-top:8px">
-              <div><strong>Beneficiary:</strong> Josh Smith</div>
-              <div><strong>Account Number:</strong> XXXXXX</div>
-              <div><strong>Country:</strong> Argentina</div>
-              <div><strong>Bank Name:</strong> Banco X</div>
-              <div><strong>SWIFT Code:</strong> BACOARBA</div>
-              <div><strong>Sucursal N°:</strong> 999</div>
+      <!-- Language -->
+      <section id="language" class="screen">
+        <div class="card">
+          <div class="brand-badge">ARGEN-PAY</div>
+          <h3>Elija un idioma para continuar...</h3>
+          <div class="langs">
+            <button class="btn ghost" data-to="onboard">INGLÉS</button>
+            <button class="btn ghost" data-to="onboard">ESPAÑOL</button>
+            <button class="btn ghost" data-to="onboard">PORTUGUÉS</button>
+            <button class="btn ghost" data-to="onboard">FRANCÉS</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Onboarding / KYC -->
+      <section id="onboard" class="screen">
+        <div class="card">
+          <h4>Bienvenido a ARGENPAY!</h4>
+          <p class="muted">Vamos a necesitar algo de información para continuar.</p>
+
+          <form id="kycForm">
+            <label>Correo electrónico</label>
+            <input type="email" placeholder="ingresar correo electrónico" required>
+
+            <label>Teléfono</label>
+            <input type="tel" placeholder="ingresar teléfono" required>
+
+            <label>Escanear Documento</label>
+            <div class="row">
+              <button type="button" class="btn ghost small" id="scanDoc">Escanear Documento</button>
             </div>
 
-            <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px">
-              <button class="big-btn ghost" onclick="shareDetails()"><i class="fa-solid fa-file-arrow-down"></i>  SHARE DETAILS</button>
-              <button class="big-btn ghost" onclick="rescueOrder()"><i class="fa-solid fa-lifebuoy"></i>  RESCUE ORDER</button>
+            <label>Moneda</label>
+            <div class="row">
+              <button type="button" class="btn ghost small" data-currency> DÓLAR </button>
+              <button type="button" class="btn ghost small" data-currency> EURO </button>
             </div>
 
-          </div>
-        </div>
-        <button class="big-btn ghost" style="position:absolute;right:14px;top:12px;border-radius:8px;width:38px;padding:6px" onclick="goTo('screen-home')">✕</button>
-        <footer class="version">Versión 1.0</footer>
-      </section>
-
-      <!-- Screen: Language selection -->
-      <section id="screen-language" class="screen">
-        <div style="text-align:center">
-          <div class="brand">ARGEN-PAY</div>
-          <h5 style="margin-top:18px">Elija un idioma para continuar...</h5>
-          <div class="menu-list" style="margin-top:18px">
-            <button class="big-btn ghost" onclick="goTo('screen-onboard')">INGLÉS</button>
-            <button class="big-btn ghost" onclick="goTo('screen-onboard')">ESPAÑOL</button>
-            <button class="big-btn ghost" onclick="goTo('screen-onboard')">PORTUGUÉS</button>
-            <button class="big-btn ghost" onclick="goTo('screen-onboard')">FRANCÉS</button>
-          </div>
-        </div>
-        <button class="big-btn ghost" style="position:absolute;right:14px;top:12px;border-radius:8px;width:38px;padding:6px" onclick="goTo('screen-home')">✕</button>
-        <footer class="version">Versión 1.0</footer>
-      </section>
-
-      <!-- Screen: Onboarding / KYC form -->
-      <section id="screen-onboard" class="screen">
-        <div>
-          <div class="brand">Bienvenido a ARGENPAY!</div>
-          <small class="subtitle">La mejor forma de pagar en Argentina</small>
-
-          <div class="cardish" style="margin-top:10px">
-            <form id="kycForm" onsubmit="event.preventDefault();completeKyc()">
-              <div class="mb-2">
-                <label class="form-label">Correo electrónico</label>
-                <input class="form-control" type="email" placeholder="ingresar correo electrónico" required>
-              </div>
-              <div class="mb-2">
-                <label class="form-label">Teléfono</label>
-                <input class="form-control" type="tel" placeholder="ingresar teléfono" required>
-              </div>
-              <div class="mb-2">
-                <label class="form-label">Escanear Documento</label>
-                <button class="big-btn ghost" type="button" onclick="openCameraModal()"><i class="fa-solid fa-camera"></i> Escanear Documento</button>
-              </div>
-
-              <div class="mb-2">
-                <label class="form-label">Moneda</label>
-                <div class="d-flex gap-2">
-                  <button type="button" class="btn btn-outline-secondary flex-fill" onclick="selectCurrency(this)">DOLLAR</button>
-                  <button type="button" class="btn btn-outline-secondary flex-fill" onclick="selectCurrency(this)">EURO</button>
-                </div>
-              </div>
-
-              <div class="mb-2 d-flex gap-2">
-                <input class="form-control" placeholder="dd/mm/yyyy" required>
-                <input class="form-control" placeholder="dd/mm/yyyy" required>
-              </div>
-
-              <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" id="terms">
-                <label class="form-check-label" for="terms">Entiendo y acepto. <a href="#">Leer Términos</a></label>
-              </div>
-
-              <div class="d-flex justify-content-between">
-                <button class="btn btn-light" onclick="goTo('screen-language')" type="button">&lt; VOLVER</button>
-                <button class="big-btn" type="submit">CONTINUAR</button>
-              </div>
-            </form>
-          </div>
-        </div>
-
-        <button class="big-btn ghost" style="position:absolute;right:14px;top:12px;border-radius:8px;width:38px;padding:6px" onclick="goTo('screen-home')">✕</button>
-        <footer class="version">Versión 1.0</footer>
-      </section>
-
-      <!-- Screen: KYC success -->
-      <section id="screen-success" class="screen">
-        <div style="text-align:center;margin-top:18vh">
-          <div class="brand">¡Felicidades!</div>
-          <div class="cardish" style="margin-top:16px;text-align:center">
-            <i class="fa-solid fa-circle-check fa-3x" style="color:var(--brand)"></i>
-            <h5 style="margin-top:8px">Su información ha sido cargada exitosamente!</h5>
-            <p style="font-size:13px;color:rgba(0,0,0,.6)">Le enviaremos una notificación cuando su perfil esté activo y su cuenta esté lista para recibir fondos.</p>
-          </div>
-        </div>
-        <button class="big-btn ghost" style="position:absolute;right:14px;top:12px;border-radius:8px;width:38px;padding:6px" onclick="goTo('screen-home')">✕</button>
-        <footer class="version">Versión 1.0</footer>
-      </section>
-
-      <!-- Screen: Account / Dashboard -->
-      <section id="screen-account" class="screen">
-        <div>
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <div class="brand">ARGEN-PAY</div>
-            <div style="display:flex;gap:10px;align-items:center">
-              <div class="pill">Perfil <i class="fa-regular fa-circle-user"></i></div>
-            </div>
-          </div>
-
-          <div class="cardish" style="margin-top:12px;text-align:center">
-            <div class="balance">
-              <div class="small-amt">Balance de Cuenta</div>
-              <div class="big-amt">USD 500.00</div>
-              <div class="small-amt">ARS 685,000.00</div>
+            <label>Fechas (ingreso / salida)</label>
+            <div class="row">
+              <input type="text" placeholder="dd/mm/yyyy">
+              <input type="text" placeholder="dd/mm/yyyy">
             </div>
 
-            <div style="margin-top:12px" class="menu-list">
-              <button class="big-btn ghost" onclick="goTo('screen-map')">MAPA DE PROMOCIONES</button>
-              <button class="big-btn ghost" onclick="goTo('screen-history')">HISTORIAL DE PAGOS</button>
-              <button class="big-btn ghost" onclick="openQrModal()">QR SCANNER</button>
+            <div class="form-check">
+              <input type="checkbox" id="terms">
+              <label for="terms">Entiendo y acepto. <a href="#">Leer Términos</a></label>
             </div>
-          </div>
-        </div>
 
-        <button class="big-btn ghost" style="position:absolute;right:14px;top:12px;border-radius:8px;width:38px;padding:6px" onclick="goTo('screen-home')">✕</button>
-        <footer class="version">Versión 1.0</footer>
+            <div class="row buttons">
+              <button type="button" class="btn light" data-to="language">&lt; VOLVER</button>
+              <button type="submit" class="btn primary">CONTINUAR</button>
+            </div>
+          </form>
+        </div>
       </section>
 
-      <!-- Screen: History -->
-      <section id="screen-history" class="screen">
-        <div>
-          <div class="brand">ARGEN-PAY</div>
-          <h6 style="margin-top:8px">Historial de Movimientos</h6>
-          <div class="history cardish">
+      <!-- Success -->
+      <section id="success" class="screen">
+        <div class="card center">
+          <i class="fa-solid fa-circle-check fa-3x success-ico"></i>
+          <h4>¡Felicidades!</h4>
+          <p>Su información ha sido cargada exitosamente! Le enviaremos una notificación cuando su perfil esté activo.</p>
+        </div>
+      </section>
+
+      <!-- Cash / SWIFT -->
+      <section id="cash" class="screen">
+        <div class="card">
+          <h5>Datos Bancarios</h5>
+          <div class="swift-box">
+            <div><strong>Beneficiary:</strong> Josh Smith</div>
+            <div><strong>Account Number:</strong> XXXXXX</div>
+            <div><strong>Country:</strong> Argentina</div>
+            <div><strong>Bank Name:</strong> Banco X</div>
+            <div><strong>SWIFT Code:</strong> BACOARBA</div>
+            <div><strong>Sucursal N°:</strong> 999</div>
+          </div>
+
+          <div class="row promo-actions">
+            <button class="btn ghost small" id="shareDetails"><i class="fa-solid fa-file-arrow-down"></i> SHARE DETAILS</button>
+            <button class="btn ghost small" id="rescueOrder"><i class="fa-solid fa-life-ring"></i> RESCUE ORDER</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Account / Dashboard -->
+      <section id="account" class="screen">
+        <div class="card">
+          <div class="account-header">
+            <div>
+              <div class="brand-badge small">ARGEN-PAY</div>
+              <div class="muted">Balance de Cuenta</div>
+            </div>
+            <div class="profile-pill">Perfil <i class="fa-regular fa-circle-user"></i></div>
+          </div>
+
+          <div class="balances">
+            <div class="usd">USD <span class="amount">500.00</span></div>
+            <div class="ars">ARS <span class="amount">685,000.00</span></div>
+          </div>
+
+          <div class="menu">
+            <button class="btn ghost" data-to="map">MAPA DE PROMOCIONES</button>
+            <button class="btn ghost" data-to="history">HISTORIAL DE PAGOS</button>
+            <button class="btn ghost" id="openQr">QR SCANNER</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- History -->
+      <section id="history" class="screen">
+        <div class="card">
+          <h5>Historial de Movimientos</h5>
+          <div class="history-list">
             <div class="txn">
               <div>
-                <div style="font-weight:700">17/08/2025 - Debit</div>
-                <div style="font-size:12px;color:rgba(0,0,0,.45)">Compra - Supermercado</div>
+                <div class="title">17/08/2025 - Debit</div>
+                <div class="muted">Compra - Supermercado</div>
               </div>
-              <div style="text-align:right">
-                <div>ARS 30,000</div>
-                <div style="font-size:12px">USD 22.67</div>
+              <div class="right">
+                <div class="amount">ARS 30,000</div>
+                <div class="muted">USD 22.67</div>
               </div>
             </div>
+
             <div class="txn">
               <div>
-                <div style="font-weight:700">15/08/2025 - Debit</div>
-                <div style="font-size:12px;color:rgba(0,0,0,.45)">Carga de saldo</div>
+                <div class="title">15/08/2025 - Debit</div>
+                <div class="muted">Carga de saldo</div>
               </div>
-              <div style="text-align:right">
-                <div>ARS 50,000</div>
-                <div style="font-size:12px">USD 37.78</div>
+              <div class="right">
+                <div class="amount">ARS 50,000</div>
+                <div class="muted">USD 37.78</div>
               </div>
             </div>
           </div>
 
-          <div style="margin-top:12px;text-align:center">
-            <button class="big-btn ghost" onclick="goTo('screen-account')">RETURN TO MAIN MENU</button>
-          </div>
+          <div class="center"><button class="btn light" data-to="account">RETURN TO MAIN MENU</button></div>
         </div>
-        <button class="big-btn ghost" style="position:absolute;right:14px;top:12px;border-radius:8px;width:38px;padding:6px" onclick="goTo('screen-home')">✕</button>
-        <footer class="version">Versión 1.0</footer>
       </section>
 
-      <!-- Screen: Map of promotions -->
-      <section id="screen-map" class="screen">
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div class="brand">ARGEN-PAY</div>
-          <h6>MAPA DE PROMOCIONES</h6>
-
-          <div id="map" class="cardish"></div>
-
-          <div class="cardish promo-list" id="promoList">
-            <!-- promos injected by JS -->
+      <!-- Map (static image + interactive pins) -->
+      <section id="map" class="screen">
+        <div class="card">
+          <h5>MAPA DE PROMOCIONES</h5>
+          <div class="map-wrap">
+            <img src="map-static.jpg" alt="Mapa Ciudad" class="map-img" id="mapImg">
+            <!-- pins (positioned absolutely over the image) -->
+            <button class="pin" style="left:62%;top:28%" data-title="El Ateneo" data-desc="10% OFF">📍</button>
+            <button class="pin" style="left:48%;top:45%" data-title="Jardín Japonés" data-desc="15% OFF">📍</button>
+            <button class="pin" style="left:60%;top:32%" data-title="Teatro Colón" data-desc="20% OFF">📍</button>
+            <button class="pin" style="left:36%;top:50%" data-title="Las Violetas" data-desc="20% OFF">📍</button>
           </div>
+
+          <div class="promo-list" id="promoList"></div>
         </div>
-        <button class="big-btn ghost" style="position:absolute;right:14px;top:12px;border-radius:8px;width:38px;padding:6px" onclick="goTo('screen-home')">✕</button>
-        <footer class="version">Versión 1.0</footer>
       </section>
 
-    </div>
+    </main>
+
+    <!-- bottom tabs -->
+    <nav class="tabs">
+      <button class="tab active" data-to="home"><i class="fa-solid fa-house"></i><span>Inicio</span></button>
+      <button class="tab" data-to="map"><i class="fa-solid fa-map-marker-alt"></i><span>Promos</span></button>
+      <button class="tab" data-to="history"><i class="fa-solid fa-clock-rotate-left"></i><span>Historial</span></button>
+      <button class="tab" data-to="account"><i class="fa-solid fa-wallet"></i><span>Cuenta</span></button>
+    </nav>
+
   </div>
 
-  <!-- small modals (fake) -->
-  <div id="cameraModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);align-items:center;justify-content:center">
-    <div style="background:white;padding:14px;border-radius:12px;width:280px;text-align:center">
-      <div style="font-weight:700">Cámara activada</div>
-      <div style="font-size:13px;color:rgba(0,0,0,.6);margin-top:8px">(Simulación) — Permitir acceso para escanear documentos.</div>
-      <div style="margin-top:10px"><button class="big-btn ghost" onclick="closeCameraModal()">Cerrar</button></div>
+  <!-- simple modals -->
+  <div id="tooltip" class="tooltip" style="display:none">
+    <div class="tooltip-card">
+      <div class="t-title"></div>
+      <div class="t-desc muted"></div>
+      <div class="t-actions"><button class="btn light" id="tClose">Cerrar</button></div>
     </div>
   </div>
-
-  <div id="qrModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);align-items:center;justify-content:center">
-    <div style="background:white;padding:14px;border-radius:12px;width:280px;text-align:center">
-      <div style="font-weight:700">Cámara habilitada para escanear QR</div>
-      <div style="font-size:13px;color:rgba(0,0,0,.6);margin-top:8px">(Simulación)</div>
-      <div style="margin-top:10px"><button class="big-btn ghost" onclick="closeQrModal()">Cerrar</button></div>
-    </div>
-  </div>
-
-  <!-- Scripts: Bootstrap, Leaflet -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <script>
-    // Simple SPA navigation
-    function goTo(id){
-      document.querySelectorAll('.screen').forEach(s=>{s.classList.remove('active');});
-      const el = document.getElementById(id);
-      if(!el) return;
-      el.classList.add('active');
-      window.scrollTo(0,0);
+    // SPA navigation (tabs + buttons)
+    function showScreen(id){
+      document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+      const tab = document.querySelector(`.tab[data-to='${id}']`);
+      if(tab) tab.classList.add('active');
     }
 
-    function shareDetails(){
-      alert('Descargando PDF con los datos para facilitarle a su banco y fondear su billetera. (Simulado)');
-    }
-    function rescueOrder(){
-      alert('Sus fondos restantes serán transferidos nuevamente a su banco de origen. (Simulado)');
-    }
+    document.addEventListener('click', e=>{
+      const to = e.target.closest('[data-to]');
+      if(to){ showScreen(to.getAttribute('data-to')); }
 
-    function openCameraModal(){document.getElementById('cameraModal').style.display='flex';}
-    function closeCameraModal(){document.getElementById('cameraModal').style.display='none';}
-
-    function openQrModal(){document.getElementById('qrModal').style.display='flex';}
-    function closeQrModal(){document.getElementById('qrModal').style.display='none';}
-
-    function selectCurrency(btn){
-      // visual toggle
-      btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('btn-primary'));
-      btn.classList.add('btn-primary');
-    }
-
-    function completeKyc(){
-      goTo('screen-success');
-    }
-
-    // Map: Leaflet with sample markers (no API key required)
-    const promos = [
-      {title:'Tienda: "El Ateneo"', desc:'10% OFF', lat:-34.6037, lng:-58.3816},
-      {title:'Atracción: "Jardín Japonés"', desc:'15% OFF', lat:-34.5856, lng:-58.3946},
-      {title:'Cultura: "Teatro Colón"', desc:'20% OFF', lat:-34.6033, lng:-58.3817},
-      {title:'Café: "Las Violetas"', desc:'20% OFF', lat:-34.5930, lng:-58.4065}
-    ];
-
-    function initMap(){
-      const map = L.map('map',{scrollWheelZoom:false}).setView([-34.60,-58.38],13);
-
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-        maxZoom: 19,
-        attribution: '© OpenStreetMap contributors'
-      }).addTo(map);
-
-      promos.forEach((p,i)=>{
-        const m = L.marker([p.lat,p.lng]).addTo(map).bindPopup(`<b>${p.title}</b><br>${p.desc}`);
-        // build promo list
-        const el = document.createElement('div');
-        el.className='d-flex justify-content-between align-items-center p-2';
-        el.innerHTML = `<div><strong>${p.title}</strong><div style='font-size:12px;color:rgba(0,0,0,.6)'>${p.desc}</div></div><button class='btn btn-sm btn-outline-primary' onclick='panTo(${p.lat},${p.lng})'>Ver</button>`;
-        document.getElementById('promoList').appendChild(el);
-      });
-    }
-    function panTo(lat,lng){
-      const mapEl = document.getElementById('map');
-      if(!mapEl._leaflet_map){
-        // store map reference if needed
+      // pins
+      if(e.target.classList.contains('pin')){
+        const title = e.target.getAttribute('data-title');
+        const desc = e.target.getAttribute('data-desc');
+        showTooltip(title, desc);
       }
-      // center map
-      const map = window._argenMap;
-      if(map){ map.setView([lat,lng],15); }
-    }
-
-    // small boot logic
-    window.addEventListener('load',()=>{
-      initMap();
-      // expose map variable for panTo usage
-      window._argenMap = document.querySelector('#map')? L.map('map').setView([-34.60,-58.38],13) : null;
-      // The map was already created inside initMap; reusing map reference there would be ideal. Keep simple for prototype.
-
-      // show fade-ins on visible active screen
-      document.querySelectorAll('.screen.active .cardish, .screen.active .big-btn').forEach((el,i)=>{ el.classList.add('fade-in'); });
     });
+
+    // tabs
+    document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click', ()=> showScreen(t.getAttribute('data-to'))));
+
+    // KYC form
+    document.getElementById('kycForm').addEventListener('submit', e=>{ e.preventDefault(); showScreen('success'); });
+
+    // promo list from pins
+    const pins = Array.from(document.querySelectorAll('.pin')).map(p=>({title:p.dataset.title,desc:p.dataset.desc}));
+    const promoList = document.getElementById('promoList');
+    pins.forEach(p=>{
+      const el = document.createElement('div'); el.className='promo-item'; el.innerHTML = `<div><strong>${p.title}</strong><div class='muted'>${p.desc}</div></div><button class='btn small' onclick="showScreen('map')">Ver</button>`;
+      promoList.appendChild(el);
+    });
+
+    // tooltip modal
+    function showTooltip(title,desc){
+      const tip = document.getElementById('tooltip');
+      tip.style.display='flex';
+      tip.querySelector('.t-title').innerText = title;
+      tip.querySelector('.t-desc').innerText = desc;
+    }
+    document.getElementById('tClose').addEventListener('click', ()=>{ document.getElementById('tooltip').style.display='none'; });
+
+    // simple camera / qr simulation
+    document.getElementById('scanDoc').addEventListener('click', ()=> alert('Cámara simulada para escanear documento'));
+    document.getElementById('openQr').addEventListener('click', ()=> alert('Simulación: Cámara habilitada para escanear QR'));
+
+    // share / rescue
+    document.getElementById('shareDetails').addEventListener('click', ()=> alert('Descargando PDF con los datos. (Simulado)'));
+    document.getElementById('rescueOrder').addEventListener('click', ()=> alert('Sus fondos serán transferidos al banco de origen. (Simulado)'));
+
+    // initial view
+    showScreen('home');
   </script>
 </body>
 </html>
