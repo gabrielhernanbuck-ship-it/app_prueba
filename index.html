@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Pantalla 1 - Login -->
+  <!-- PANTALLA 1 - LOGIN -->
   <div class="screen" id="login-screen">
     <h1>Bienvenido</h1>
     <svg id="svg-button" class="svg-icon" width="80" height="80" viewBox="0 0 24 24">
@@ -17,7 +17,7 @@
     <button id="login-btn">Log in</button>
   </div>
 
-  <!-- Pantalla 2 - Escaneo biométrico -->
+  <!-- PANTALLA 2 - ESCANEO BIOMÉTRICO -->
   <div class="screen hidden" id="scan-screen">
     <div class="scan-container">
       <div class="loader"></div>
@@ -25,10 +25,24 @@
     </div>
   </div>
 
-  <!-- Pantalla 3 - Mapa y botones -->
+  <!-- PANTALLA 3 - PRINCIPAL -->
   <div class="screen hidden" id="main-screen">
-    <h2>Pantalla principal</h2>
-    <p>Mapa, promociones, botones, etc...</p>
+    <h2>Wallet del Turista 🌍</h2>
+    <p class="welcome">¡Bienvenido a tu billetera digital!</p>
+
+    <!-- Mapa SVG clickeable -->
+    <div class="map-container">
+      <svg viewBox="0 0 300 200" class="map-svg">
+        <rect x="10" y="10" width="100" height="80" fill="#cce5ff" stroke="#333" class="zone" data-zone="Zona Norte"></rect>
+        <rect x="150" y="10" width="120" height="80" fill="#ffcccc" stroke="#333" class="zone" data-zone="Zona Sur"></rect>
+        <rect x="50" y="120" width="200" height="60" fill="#d4edda" stroke="#333" class="zone" data-zone="Centro"></rect>
+        <text x="60" y="50" font-size="14">Norte</text>
+        <text x="190" y="50" font-size="14">Sur</text>
+        <text x="130" y="160" font-size="14">Centro</text>
+      </svg>
+    </div>
+
+    <button class="primary-btn">Ver promociones 🛍️</button>
   </div>
 
   <script>
@@ -38,24 +52,30 @@
     const mainScreen = document.getElementById('main-screen');
 
     loginBtn.addEventListener('click', () => {
-      // Ocultar login y mostrar escaneo
       loginScreen.classList.add('hidden');
       scanScreen.classList.remove('hidden');
 
-      // Simular 2 segundos de escaneo
       setTimeout(() => {
         scanScreen.classList.add('hidden');
         mainScreen.classList.remove('hidden');
       }, 2000);
     });
 
-    // Ejemplo de click en el SVG
     document.getElementById('svg-button').addEventListener('click', () => {
       alert('SVG clickeado!');
+    });
+
+    // Click en zonas del mapa
+    document.querySelectorAll('.zone').forEach(zone => {
+      zone.addEventListener('click', () => {
+        alert(`Zona seleccionada: ${zone.getAttribute('data-zone')}`);
+      });
     });
   </script>
 </body>
 </html>
+
+
 
 
 
