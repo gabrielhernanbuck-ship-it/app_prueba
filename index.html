@@ -1,91 +1,87 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Banco - Promociones</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+  <title>ArgenPay - Prototipo Móvil</title>
+
+  <!-- Bootstrap CSS (CDN) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- FontAwesome -->
+  <script src="https://kit.fontawesome.com/a2b9f6d6b2.js" crossorigin="anonymous"></script>
+
+  <!-- Tu CSS -->
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header>
-    <h1>Banco Digital</h1>
-    <nav>
-      <ul>
-        <li><a href="#home" class="nav-link active">Inicio</a></li>
-        <li><a href="#promos" class="nav-link">Promociones</a></li>
-        <li><a href="#contacto" class="nav-link">Contacto</a></li>
-      </ul>
-    </nav>
-  </header>
 
-  <main>
-    <!-- Sección Inicio -->
-    <section id="home" class="page active">
-      <h2>Bienvenido a tu Banco</h2>
-      <p>Gestiona tus cuentas, promociones y beneficios desde un solo lugar.</p>
-    </section>
+  <!-- APP WRAPPER - centrado, ancho 100% -->
+  <div id="app" class="app-shell">
 
-    <!-- Sección Promociones -->
-    <section id="promos" class="page">
-      <h2>Mapa de Promociones</h2>
-      <div class="mapa">
-        <div class="promo-card">
-          <h3>Descuento en Restaurantes</h3>
-          <p>20% de descuento con tu tarjeta de crédito.</p>
-        </div>
-        <div class="promo-card">
-          <h3>Combustible</h3>
-          <p>10% de reintegro todos los martes.</p>
-        </div>
-        <div class="promo-card">
-          <h3>Electrónica</h3>
-          <p>12 cuotas sin interés en tiendas seleccionadas.</p>
-        </div>
+    <!-- ========== SCREEN: HOME ========== -->
+    <section id="home" class="screen active-screen">
+      <div class="top-brand">
+        <div class="brand-pill">ARGEN-PAY</div>
+        <div class="powered">Powered By BANCO X</div>
       </div>
+
+      <div class="spaced-buttons">
+        <button class="btn main-btn" onclick="showScreen('login')">LOG IN</button>
+        <button class="btn ghost-btn" onclick="showScreen('signin')">SING IN</button>
+        <button class="btn ghost-btn" onclick="showScreen('cash')">CASH IN/OUT</button>
+      </div>
+
+      <div class="version">Versión 1.0</div>
     </section>
 
-    <!-- Sección Contacto -->
-    <section id="contacto" class="page">
-      <h2>Contacto</h2>
-      <form>
-        <label>Nombre</label>
-        <input type="text" placeholder="Tu nombre" required />
-        <label>Email</label>
-        <input type="email" placeholder="tu@email.com" required />
-        <label>Mensaje</label>
-        <textarea placeholder="Escribí tu mensaje..."></textarea>
-        <button type="submit">Enviar</button>
-      </form>
+    <!-- ========== SCREEN: CASH IN/OUT (SWIFT + opciones) ========== -->
+    <section id="cash" class="screen">
+      <div class="header-with-close">
+        <div class="brand-pill small">ARGEN-PAY</div>
+        <button class="close-x" onclick="showScreen('home')">✕</button>
+      </div>
+
+      <div class="content-card">
+        <h5>Datos Bancarios:</h5>
+        <div class="bank-card">
+          <div><strong>Beneficiary:</strong> Josh Smith</div>
+          <div><strong>Account Number:</strong> XXXXXX</div>
+          <div><strong>Country:</strong> Argentina</div>
+          <div><strong>Bank Name:</strong> Banco X</div>
+          <div><strong>SWIFT Code:</strong> BACOARBA</div>
+          <div><strong>Sucursal N°:</strong> 999</div>
+        </div>
+
+        <div class="mt-3 small-label">To deposit money:</div>
+        <button class="btn light-btn w-100 mb-2" data-bs-toggle="modal" data-bs-target="#modalShare">
+          <i class="fa-solid fa-share-nodes"></i> SHARE DETAILS
+        </button>
+
+        <div class="mt-2 small-label">To rescue money:</div>
+        <button class="btn light-btn w-100" data-bs-toggle="modal" data-bs-target="#modalRescue">
+          <i class="fa-solid fa-file-invoice-dollar"></i> RESCUE ORDER
+        </button>
+      </div>
+
+      <div class="version">Versión 1.0</div>
     </section>
-  </main>
 
-  <footer>
-    <p>&copy; 2025 Banco Digital. Todos los derechos reservados.</p>
-  </footer>
+    <!-- ========== SCREEN: LANGUAGE SELECTION (SIGN IN flow) ========== -->
+    <section id="signin" class="screen">
+      <div class="header-with-close">
+        <div class="brand-pill small">ARGEN-PAY</div>
+        <button class="close-x" onclick="showScreen('home')">✕</button>
+      </div>
 
-  <script>
-    // Navegación SPA simple con transición
-    const links = document.querySelectorAll('.nav-link');
-    const pages = document.querySelectorAll('.page');
+      <div class="content-card">
+        <h5>Elija un idioma para continuar...</h5>
+        <div class="lang-list">
+          <button class="btn ghost-btn w-100" onclick="showScreen('onboarding')">INGLÉS</button>
+          <button class="btn ghost-btn w-100" onclick="showScreen('onboarding')">ESPAÑOL</button>
+          <button class="btn ghost-btn w-100" onclick="showScreen('onboarding')">PORTUGUÉS</button>
+          <but
 
-    links.forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        links.forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
-
-        const target = link.getAttribute('href').substring(1);
-        pages.forEach(page => {
-          page.classList.remove('active');
-          if (page.id === target) {
-            page.classList.add('active');
-          }
-        });
-      });
-    });
-  </script>
-</body>
-</html>
 
 
 
