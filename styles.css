@@ -1,140 +1,132 @@
-/* ----- Reset básico ----- */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* styles.css - Mobile-first styles for ARGEN-PAY prototype */
+
+/* Reset / base */
+:root {
+  --blue: #1637ff;
+  --soft-blue: rgba(22,55,255,0.08);
+  --muted: #6c6c7a;
+  --bg: #ffffff;
+  --card: #f8fbff;
+  --pill-radius: 8px;
+  --app-max-width: 460px; /* still adapt to smaller displays */
 }
 
-body {
-  font-family: 'Segoe UI', Tahoma, sans-serif;
-  background: #f5f7fa;
-  color: #333;
-  line-height: 1.6;
+* { box-sizing: border-box; }
+html,body { height:100%; margin:0; font-family: "Inter", "Helvetica Neue", Arial, sans-serif; -webkit-font-smoothing:antialiased; background: #fff; color: #111; }
+.app-shell {
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:14px;
 }
 
-/* ----- Encabezado ----- */
-header {
-  background: linear-gradient(135deg, #003366, #0055a5);
-  color: #fff;
-  padding: 1.2rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-header h1 {
-  font-size: 1.8rem;
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 2rem;
-}
-
-nav a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s;
-}
-
-nav a:hover,
-nav a.active {
-  color: #ffd700;
-}
-
-/* ----- Secciones ----- */
-main {
-  padding: 2rem;
-  max-width: 1000px;
-  margin: auto;
-}
-
-.page {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.5s ease;
-  position: absolute;
-  width: 100%;
-  max-width: 1000px;
-  left: 0;
-  right: 0;
-  margin: auto;
-  display: none;
-}
-
-.page.active {
-  opacity: 1;
-  transform: translateY(0);
-  position: relative;
-  display: block;
-}
-
-/* ----- Promociones ----- */
-.mapa {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1.5rem;
-}
-
-.promo-card {
+/* Screen container */
+.screen {
+  width:100%;
+  max-width:var(--app-max-width);
+  border-radius:18px;
   background: #fff;
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 6px 30px rgba(8,24,63,0.06);
+  padding:18px;
+  display:none;
+  flex-direction:column;
+  gap:12px;
+  position:relative;
 }
 
-.promo-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+/* active */
+.active-screen { display:flex; }
+
+/* Top branding */
+.top-brand { display:flex; flex-direction:column; align-items:center; gap:8px; margin-top:10px; }
+.brand-pill {
+  background: var(--blue); color: #fff; padding:12px 22px; border-radius:14px; font-weight:700; letter-spacing:1px; font-size:20px;
+  box-shadow: 0 4px 12px rgba(22,55,255,0.12);
+}
+.brand-pill.small { padding:10px 16px; font-size:18px; display:inline-block; margin:0; }
+.powered { color:var(--muted); font-size:13px; margin-top:0; }
+
+/* Buttons area like sketch */
+.spaced-buttons { display:flex; flex-direction:column; gap:12px; padding:20px 30px; margin-top:28px; }
+.btn { border-radius:12px; padding:12px 16px; font-weight:700; }
+.main-btn {
+  background: var(--blue); color:#fff; border:none; box-shadow: 0 6px 18px rgba(22,55,255,0.15);
+}
+.ghost-btn {
+  background:#eef2ff; color:#111; border:none;
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,0.02);
+}
+.light-btn {
+  background: #eef3fb; border:1px solid rgba(11,93,244,0.12); color:#0b5df4;
+}
+.outline-btn {
+  background:transparent; border:1px dashed rgba(0,0,0,0.08);
 }
 
-.promo-card h3 {
-  color: #003366;
-  margin-bottom: 0.5rem;
+/* small stuff */
+.version { font-size:12px; color:var(--muted); text-align:right; margin-top:auto; padding-right:6px; }
+.small-label { font-size:13px; color:var(--muted); }
+.muted { color:var(--muted); font-size:14px; }
+
+/* header with X close */
+.header-with-close { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.close-x {
+  background: #e9eefc; border: none; color:#5b6bff; width:36px; height:36px; border-radius:8px; font-weight:700;
+  display:flex; align-items:center; justify-content:center;
 }
 
-/* ----- Formulario de contacto ----- */
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  margin-top: 1rem;
+/* content card (white area) */
+.content-card {
+  background: #ffffff; border-radius:12px; padding:14px; box-shadow: 0 6px 18px rgba(9,30,66,0.04);
 }
 
-input, textarea {
-  padding: 0.8rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 1rem;
-  width: 100%;
+/* bank card */
+.bank-card { border:2px solid rgba(11,93,244,0.12); padding:12px; border-radius:6px; background: #fff; font-size:14px; color:#0b325f; }
+
+/* profile row / balance */
+.profile-row { display:flex; align-items:center; gap:12px; }
+.profile-pill { background:#eef3ff; border-radius:24px; padding:10px; width:46px; height:46px; display:flex; align-items:center; justify-content:center; color:#1637ff; }
+.profile-name { font-weight:600; color:#1637ff; }
+
+.balance { margin-top:10px; display:flex; align-items:center; justify-content:space-between; padding:12px; border-bottom:1px dashed rgba(0,0,0,0.06); }
+.balance .currency { color:#1637ff; font-weight:700; font-size:14px; }
+.balance .amount { font-size:24px; font-weight:800; color:#0b2140; }
+
+/* map */
+.map-wrapper { width:100%; height:220px; display:flex; align-items:center; justify-content:center; background:#fbfcff; border-radius:8px; padding:8px; }
+.svg-map { width:100%; height:100%; border-radius:6px; background: linear-gradient(180deg,#fff,#f7fbff); }
+
+/* promo list */
+.promo-list { margin-top:6px; }
+.promo-item { padding:8px 10px; border:1px solid rgba(13,55,240,0.06); border-radius:8px; margin-bottom:8px; font-size:14px; display:flex; justify-content:space-between; align-items:center; }
+
+/* history box */
+.history-box { max-height:180px; overflow-y:auto; border:1px solid rgba(0,0,0,0.06); border-radius:8px; padding:8px; background:#fff; }
+.history-box .entry { padding:10px; border-bottom:1px dashed rgba(0,0,0,0.04); font-size:13px; display:flex; justify-content:space-between; }
+.history-box .entry:last-child { border-bottom:none; }
+
+/* success style */
+.center { text-align:center; }
+.success-icon { font-size:64px; color: #1fbf7a; margin-bottom:8px; }
+
+/* language list */
+.lang-list { display:flex; flex-direction:column; gap:10px; margin-top:8px; }
+
+/* visual currency active */
+.active-currency { background:#e7f2ff !important; border:1px solid rgba(11,93,244,0.12) !important; }
+
+/* small-screen tweaks */
+@media (max-width:420px) {
+  .brand-pill { font-size:18px; padding:10px 16px; }
+  .spaced-buttons { padding:18px; }
+  .content-card { padding:12px; }
+  .map-wrapper { height:180px; }
 }
 
-button {
-  padding: 0.9rem;
-  background: #0055a5;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.3s;
-}
+/* ensure the app looks phone-like centered */
+body { background: linear-gradient(180deg,#fafbff,#ffffff); display:flex; align-items:center; justify-content:center; padding:18px 10px; }
 
-button:hover {
-  background: #003366;
-}
 
-/* ----- Footer ----- */
-footer {
-  text-align: center;
-  padding: 1rem;
-  background: #003366;
-  color: #fff;
-  margin-top: 3rem;
-}
 
 
