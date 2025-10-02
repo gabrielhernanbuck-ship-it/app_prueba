@@ -1,493 +1,100 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ARGEN-PAY — Prototipo Móvil</title>
-
-  <!-- Bootstrap & FontAwesome -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-
-  <!-- Custom -->
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Billetera Turística</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-  <!-- APP container (mobile width centered) -->
-  <div id="app" class="app-container">
+  <!-- 📍 Pantalla A - Mapa turístico -->
+  <section id="screenA" class="screen active">
+    <header class="header">
+      <h2>Mapa Turístico</h2>
+    </header>
 
-    <!-- ---------- SCREEN: HOME (Imagen A original) ---------- -->
-    <section id="screen-home" class="screen active">
-      <header class="topbar">
-        <div class="brand">ARGEN-PAY</div>
-        <!-- no X here per diseño original -->
-      </header>
+    <main class="content">
+      <div class="map-container">
+        <div class="map-zone zone1" onclick="showDiscount('Centro Histórico - 10% OFF en tours')">Centro Histórico<br><span>-10%</span></div>
+        <div class="map-zone zone2" onclick="showDiscount('Museos y Cultura - 20% OFF entradas')">Museos<br><span>-20%</span></div>
+        <div class="map-zone zone3" onclick="showDiscount('Gastronomía - 15% OFF en restaurantes')">Gastronomía<br><span>-15%</span></div>
+        <div class="map-zone zone4" onclick="showDiscount('Compras y Ocio - 5% OFF en tiendas')">Compras<br><span>-5%</span></div>
+      </div>
+      <button class="btn btn-primary mt-4 w-100" onclick="goTo('screenB')">Abrir Billetera</button>
+    </main>
+  </section>
 
-      <main class="pane">
-        <div class="hero text-center mt-3">
-          <div class="brand-large">ARGEN-PAY</div>
-          <div class="muted">Powered by BANCO X</div>
+  <!-- 🔐 Pantalla B - Login -->
+  <section id="screenB" class="screen">
+    <header class="header">
+      <h2>Iniciar Sesión</h2>
+      <i class="fa-solid fa-xmark close-btn" onclick="goTo('screenA')"></i>
+    </header>
+
+    <main class="content">
+      <div class="mb-3">
+        <label class="form-label">Correo Electrónico</label>
+        <input type="email" class="form-control" placeholder="ejemplo@mail.com" />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Contraseña</label>
+        <input type="password" class="form-control" placeholder="********" />
+      </div>
+      <button class="btn btn-success w-100 mt-2" onclick="goTo('screenC')">Continuar</button>
+      <button class="btn btn-secondary w-100 mt-2" onclick="goTo('screenA')">Volver</button>
+    </main>
+  </section>
+
+  <!-- 🤳 Pantalla C - Verificación -->
+  <section id="screenC" class="screen">
+    <header class="header">
+      <h2>Verificación</h2>
+      <i class="fa-solid fa-xmark close-btn" onclick="goTo('screenB')"></i>
+    </header>
+
+    <main class="content">
+      <button class="btn btn-primary w-100 mb-3" onclick="showDiscount('Escaneo de pasaporte iniciado')">
+        <i class="fa-solid fa-passport"></i> Escanear Pasaporte
+      </button>
+      <button class="btn btn-info w-100 mb-4" onclick="showDiscount('Toma de selfie iniciada')">
+        <i class="fa-solid fa-camera"></i> Tomar una Selfie
+      </button>
+      <button class="btn btn-secondary w-100 mb-3" onclick="goTo('screenB')">Volver</button>
+      <button class="btn btn-success w-100" onclick="showDiscount('Verificación completada')">Continuar</button>
+    </main>
+  </section>
+
+  <!-- 📢 Modal -->
+  <div class="modal fade" id="infoModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Información</h5>
+          <i class="fa-solid fa-xmark close-btn" data-bs-dismiss="modal"></i>
         </div>
-
-        <div class="spacer"></div>
-
-        <div class="actions px-3">
-          <button id="btn-login" class="btn btn-primary btn-lg w-100 mb-2">LOG IN</button>
-          <button id="btn-signin" class="btn btn-light border btn-lg w-100 mb-2">SING IN</button>
-          <button id="btn-cash" class="btn btn-outline-secondary btn-lg w-100">CASH IN/OUT</button>
-        </div>
-
-        <footer class="foot small text-center text-muted mt-3">Versión 1.0</footer>
-      </main>
-    </section>
-
-    <!-- ---------- SCREEN: LANG (sign up language pick) ---------- -->
-    <section id="screen-lang" class="screen">
-      <header class="topbar">
-        <div class="brand">ARGEN-PAY</div>
-        <button class="btn-x" data-back="screen-home" aria-label="Cerrar">✕</button>
-      </header>
-
-      <main class="pane px-3">
-        <h5>Elija un idioma para continuar</h5>
-        <div class="mt-3 d-grid gap-2">
-          <button class="btn btn-light">INGLÉS</button>
-          <button class="btn btn-light">ESPAÑOL</button>
-          <button class="btn btn-light">PORTUGUÉS</button>
-          <button class="btn btn-light">FRANCÉS</button>
-        </div>
-      </main>
-    </section>
-
-    <!-- ---------- SCREEN: SIGNUP STEP1 (Pantalla C en tus imágenes) ---------- -->
-    <section id="screen-signup-step1" class="screen">
-      <header class="topbar">
-        <div class="brand">ARGEN-PAY</div>
-        <!-- Imagen 1: B y E tienen X; this screen matches your flow so X returns to screen-lang -->
-        <button class="btn-x" data-back="screen-lang" aria-label="Cerrar">✕</button>
-      </header>
-
-      <main class="pane px-3">
-        <h5>Bienvenido a ARGEN-PAY</h5>
-        <p class="small text-muted">Completa tus datos para crear la cuenta</p>
-
-        <form id="signup-form" class="mt-3">
-          <input class="form-control form-control-sm mb-2" placeholder="Nombre completo">
-          <input class="form-control form-control-sm mb-2" placeholder="Apellido">
-          <input class="form-control form-control-sm mb-2" placeholder="Correo electrónico">
-          <input class="form-control form-control-sm mb-2" placeholder="Teléfono">
-          <input type="password" class="form-control form-control-sm mb-2" placeholder="Contraseña">
-          <input type="password" class="form-control form-control-sm mb-2" placeholder="Repetir contraseña">
-
-          <!-- IMPORTANT: scan & selfie deben estar ANTES que volver/continuar -->
-          <div class="d-grid gap-2 mt-2">
-            <button type="button" class="btn btn-outline-secondary" onclick="openModalSim('modal-scan')">
-              <i class="fa-solid fa-id-card"></i> Escanear Pasaporte o ID
-            </button>
-            <button type="button" class="btn btn-outline-secondary" onclick="openModalSim('modal-selfie')">
-              <i class="fa-solid fa-camera"></i> Tomar una Selfie
-            </button>
-          </div>
-
-          <div class="d-flex gap-2 mt-3">
-            <button type="button" class="btn btn-secondary" onclick="showScreen('screen-lang')">&lt; VOLVER</button>
-            <button type="button" class="btn btn-primary ms-auto" onclick="showScreen('screen-signup-step2')">CONTINUAR</button>
-          </div>
-        </form>
-      </main>
-    </section>
-
-    <!-- ---------- SCREEN: SIGNUP STEP2 ---------- -->
-    <section id="screen-signup-step2" class="screen">
-      <header class="topbar">
-        <div class="brand">ARGEN-PAY</div>
-        <button class="btn-x" data-back="screen-signup-step1" aria-label="Cerrar">✕</button>
-      </header>
-
-      <main class="pane px-3">
-        <h6>Elija la moneda</h6>
-        <div class="d-flex gap-2 my-2">
-          <button class="btn btn-outline-primary flex-fill">DÓLAR</button>
-          <button class="btn btn-outline-primary flex-fill">EURO</button>
-        </div>
-
-        <div class="mt-3 small">
-          <a href="#" onclick="openModalSim('modal-terms');return false;">Leer Términos</a>
-          <div class="form-check mt-2">
-            <input class="form-check-input" type="checkbox" id="acceptTerms">
-            <label class="form-check-label" for="acceptTerms">Entiendo y acepto.</label>
-          </div>
-        </div>
-
-        <div class="d-flex gap-2 mt-3">
-          <button class="btn btn-secondary" onclick="showScreen('screen-signup-step1')">&lt; VOLVER</button>
-          <button class="btn btn-primary ms-auto" onclick="completeSignup()">CONTINUAR</button>
-        </div>
-      </main>
-    </section>
-
-    <!-- ---------- SCREEN: SIGNUP DONE (Pantalla E según imagen 1) ---------- -->
-    <section id="screen-signup-done" class="screen">
-      <header class="topbar">
-        <div class="brand">ARGEN-PAY</div>
-        <!-- Imagen 1: E debe tener X (según tu especificacion). X -> ir a home -->
-        <button class="btn-x" data-back="screen-home" aria-label="Cerrar">✕</button>
-      </header>
-
-      <main class="pane d-flex flex-column justify-content-center align-items-center text-center">
-        <div class="display-5 text-success"><i class="fa-solid fa-circle-check"></i></div>
-        <h5 class="mt-2">¡Registro enviado!</h5>
-        <p class="small text-muted">Le avisaremos cuando su cuenta esté activa.</p>
-      </main>
-    </section>
-
-    <!-- ---------- SCREEN: LOGIN / MAIN MENU (Imagen 2 pantalla B) ---------- -->
-    <section id="screen-login" class="screen">
-      <header class="topbar">
-        <div class="brand">ARGEN-PAY</div>
-        <!-- Imagen 2 indica X en B -> ponemos X que vuelve a home -->
-        <button class="btn-x" data-back="screen-home" aria-label="Cerrar">✕</button>
-      </header>
-
-      <main class="pane px-3">
-        <div class="d-flex justify-content-between align-items-start">
-          <div>
-            <div class="small text-muted">Perfil</div>
-            <div class="h4 mb-0">$ <span id="balance-usd">500.00</span> USD</div>
-            <div class="small text-muted">ARS <span id="balance-ars">685000.00</span></div>
-          </div>
-
-          <div class="text-end">
-            <button class="btn btn-outline-secondary btn-sm" onclick="openModalSim('modal-qr')">
-              <i class="fa-solid fa-qrcode"></i>
-            </button>
-          </div>
-        </div>
-
-        <div class="mt-3 d-grid gap-2">
-          <button class="btn btn-light border" onclick="showScreen('screen-map')">MAPA DE PROMOCIONES</button>
-          <button class="btn btn-light border" onclick="showScreen('screen-history')">HISTORIAL DE PAGOS</button>
-          <button class="btn btn-success" onclick="openModalSim('modal-qr')">QR SCANNER</button>
-        </div>
-      </main>
-    </section>
-
-    <!-- ---------- SCREEN: HISTORY ---------- -->
-    <section id="screen-history" class="screen">
-      <header class="topbar">
-        <div class="brand">ARGEN-PAY</div>
-        <!-- use X to go back to login -->
-        <button class="btn-x" data-back="screen-login" aria-label="Cerrar">✕</button>
-      </header>
-
-      <main class="pane px-3">
-        <h6>Historial de Movimientos</h6>
-        <div class="history-box mt-2">
-          <div class="history-item"><strong>17/08/2025 — Debit</strong><div class="small">ARS 52 — USD 22.67</div></div>
-          <div class="history-item"><strong>15/08/2025 — Debit</strong><div class="small">ARS 108 — USD 37.78</div></div>
-          <div class="history-item"><strong>11/08/2025 — Credit</strong><div class="small">USD 120.00</div></div>
-        </div>
-        <div class="d-grid mt-3">
-          <button class="btn btn-light" onclick="showScreen('screen-login')">RETURN TO MAIN MENU</button>
-        </div>
-      </main>
-    </section>
-
-    <!-- ---------- SCREEN: MAP (Imagen 2 pantalla D) ---------- -->
-    <section id="screen-map" class="screen">
-      <header class="topbar">
-        <div class="brand">ARGEN-PAY</div>
-        <!-- Imagen 2: D tiene X -> volver a login -->
-        <button class="btn-x" data-back="screen-login" aria-label="Cerrar">✕</button>
-      </header>
-
-      <main class="pane px-3">
-        <h6>MAPA DE PROMOCIONES</h6>
-
-        <!-- SVG ilustrado tipo infografía con zonas coloreadas y hotspots -->
-        <div class="map-wrapper mt-2">
-          <svg id="infomap" viewBox="0 0 800 520" preserveAspectRatio="xMidYMid meet" class="infographic-map">
-            <!-- background -->
-            <rect x="0" y="0" width="800" height="520" rx="14" fill="#f8fbff" />
-            <!-- areas: 4 colored zones -->
-            <g class="zones">
-              <path id="zone-1" d="M30,40 L370,40 L370,230 Q200,260 30,230 Z" fill="#a7f3d0" />
-              <path id="zone-2" d="M390,40 L770,40 L770,230 Q590,260 390,230 Z" fill="#bfdbfe" />
-              <path id="zone-3" d="M30,250 L370,250 L370,480 Q210,450 30,480 Z" fill="#fed7aa" />
-              <path id="zone-4" d="M390,250 L770,250 L770,480 Q590,450 390,480 Z" fill="#fde68a" />
-            </g>
-
-            <!-- icons / labels -->
-            <g class="icons" font-family="sans-serif" font-size="14">
-              <text x="120" y="110" fill="#064e3b" font-weight="700">Centro histórico</text>
-              <text x="520" y="110" fill="#0f172a" font-weight="700">Museos</text>
-              <text x="120" y="330" fill="#92400e" font-weight="700">Gastronomía</text>
-              <text x="520" y="330" fill="#92400e" font-weight="700">Compras</text>
-            </g>
-
-            <!-- hotspots (invisible circles but interactive) -->
-            <g class="hotspots" cursor="pointer">
-              <circle cx="180" cy="120" r="20" class="hotspot" data-title="Zona 1: Centro histórico — 10% OFF"/>
-              <circle cx="580" cy="120" r="20" class="hotspot" data-title="Zona 2: Museos y cultura — 15% OFF"/>
-              <circle cx="180" cy="340" r="20" class="hotspot" data-title="Zona 3: Gastronomía — 20% OFF"/>
-              <circle cx="580" cy="340" r="20" class="hotspot" data-title="Zona 4: Compras y ocio — 20% OFF"/>
-            </g>
-
-            <!-- footer label -->
-            <text x="12" y="16" font-size="12" fill="#334155">Mapa ilustrado (simulado)</text>
-          </svg>
-
-          <!-- promo toast (temporary) -->
-          <div id="map-toast" class="map-toast d-none"></div>
-        </div>
-
-        <div class="promo-list mt-3">
-          <div class="promo-item">Centro histórico — <span class="badge bg-primary">10% OFF</span></div>
-          <div class="promo-item">Museos — <span class="badge bg-primary">15% OFF</span></div>
-          <div class="promo-item">Gastronomía — <span class="badge bg-primary">20% OFF</span></div>
-          <div class="promo-item">Compras — <span class="badge bg-primary">20% OFF</span></div>
-        </div>
-      </main>
-    </section>
-
-    <!-- ---------- SCREEN: CASH IN/OUT (Imagen 3 pantalla B) ---------- -->
-    <section id="screen-cash" class="screen">
-      <header class="topbar">
-        <div class="brand">ARGEN-PAY</div>
-        <!-- Imagen 3: B has X -> go to home -->
-        <button class="btn-x" data-back="screen-home" aria-label="Cerrar">✕</button>
-      </header>
-
-      <main class="pane px-3">
-        <h6>Datos Bancarios</h6>
-        <div class="bank-card border rounded p-2 mb-3">
-          <div><strong>Beneficiary:</strong> Josh Smith</div>
-          <div><strong>Account Number:</strong> XXXXXX</div>
-          <div><strong>Country:</strong> Argentina</div>
-          <div><strong>Bank Name:</strong> Banco X</div>
-          <div><strong>SWIFT Code:</strong> BACOARBA</div>
-        </div>
-
-        <div class="d-grid gap-2">
-          <button class="btn btn-outline-primary" onclick="openModalSim('modal-share')"><i class="fa-solid fa-share-from-square"></i> SHARE DETAILS</button>
-          <button class="btn btn-outline-danger" onclick="openModalSim('modal-rescue')"><i class="fa-solid fa-life-ring"></i> RESCUE ORDER</button>
-        </div>
-      </main>
-    </section>
-
-  </div> <!-- end app-container -->
-
-  <!-- -------------------- Modal templates (simple) -------------------- -->
-  <div id="modal-root"></div>
-
-  <template id="tpl-modal-qr">
-    <div class="modal-overlay" data-modal="modal-qr">
-      <div class="modal-card">
-        <button class="modal-x" data-close="modal-qr">✕</button>
-        <h5>QR Scanner</h5>
-        <p class="small text-muted">Cámara simulada para leer QR.</p>
-        <div class="mt-3 text-end">
-          <button class="btn btn-primary btn-sm" data-close="modal-qr">Cerrar</button>
-        </div>
+        <div class="modal-body" id="modalMessage"></div>
       </div>
     </div>
-  </template>
+  </div>
 
-  <template id="tpl-modal-scan">
-    <div class="modal-overlay" data-modal="modal-scan">
-      <div class="modal-card">
-        <button class="modal-x" data-close="modal-scan">✕</button>
-        <h5>Escanear Documento</h5>
-        <p class="small text-muted">Simulación de cámara para escanear pasaporte/ID.</p>
-        <div class="mt-3 text-end">
-          <button class="btn btn-primary btn-sm" data-close="modal-scan">Cerrar</button>
-        </div>
-      </div>
-    </div>
-  </template>
-
-  <template id="tpl-modal-selfie">
-    <div class="modal-overlay" data-modal="modal-selfie">
-      <div class="modal-card">
-        <button class="modal-x" data-close="modal-selfie">✕</button>
-        <h5>Tomar Selfie</h5>
-        <p class="small text-muted">Simulación de cámara para selfie.</p>
-        <div class="mt-3 text-end">
-          <button class="btn btn-primary btn-sm" data-close="modal-selfie">Cerrar</button>
-        </div>
-      </div>
-    </div>
-  </template>
-
-  <template id="tpl-modal-terms">
-    <div class="modal-overlay" data-modal="modal-terms">
-      <div class="modal-card modal-large">
-        <button class="modal-x" data-close="modal-terms">✕</button>
-        <h5>Términos y Condiciones</h5>
-        <div class="terms-box">
-          <p>Texto de términos (demo). Aquí va el contenido real si lo tenés.</p>
-        </div>
-        <div class="mt-3 text-end">
-          <button class="btn btn-primary btn-sm" data-close="modal-terms">Aceptar</button>
-        </div>
-      </div>
-    </div>
-  </template>
-
-  <template id="tpl-modal-share">
-    <div class="modal-overlay" data-modal="modal-share">
-      <div class="modal-card">
-        <button class="modal-x" data-close="modal-share">✕</button>
-        <h5>Preparando PDF</h5>
-        <p class="small text-muted">Generando datos para compartir (simulado).</p>
-        <div class="mt-3 text-end">
-          <button class="btn btn-primary btn-sm" data-close="modal-share">Cerrar</button>
-        </div>
-      </div>
-    </div>
-  </template>
-
-  <template id="tpl-modal-rescue">
-    <div class="modal-overlay" data-modal="modal-rescue">
-      <div class="modal-card">
-        <button class="modal-x" data-close="modal-rescue">✕</button>
-        <h5>Rescue Order</h5>
-        <p class="small text-muted">Confirmá la transferencia de rescate (simulado).</p>
-        <div class="mt-3 text-end">
-          <button class="btn btn-danger btn-sm" data-close="modal-rescue">Confirmar</button>
-          <button class="btn btn-secondary btn-sm" data-close="modal-rescue">Cancelar</button>
-        </div>
-      </div>
-    </div>
-  </template>
-
-  <!-- -------------------- Scripts -------------------- -->
   <script>
-    // ==== SPA screen switching ====
-    function showScreen(id) {
+    // Navegación SPA
+    function goTo(screenId) {
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-      const el = document.getElementById(id);
-      if (el) el.classList.add('active');
-      // close any modal present
-      closeAllModals();
-      // hide toast if visible
-      hideMapToast();
-      // scroll top for the new screen
-      window.scrollTo({top:0, behavior:'instant'});
+      document.getElementById(screenId).classList.add('active');
     }
 
-    // initial bindings
-    document.getElementById('btn-signin').addEventListener('click', () => showScreen('screen-lang'));
-    document.getElementById('btn-login').addEventListener('click', () => showScreen('screen-login'));
-    document.getElementById('btn-cash').addEventListener('click', () => showScreen('screen-cash'));
-
-    // complete signup
-    function completeSignup() {
-      // here you would validate; simulate completion
-      showScreen('screen-signup-done');
+    // Mostrar descuentos o alertas en modal
+    function showDiscount(text) {
+      document.getElementById("modalMessage").textContent = text;
+      const modal = new bootstrap.Modal(document.getElementById("infoModal"));
+      modal.show();
     }
-
-    // handle X buttons behavior:
-    // - if a modal is open => close modal
-    // - else => follow data-back attribute target (go to that screen)
-    document.addEventListener('click', function(e){
-      // X on page topbars
-      const xBtn = e.target.closest('.btn-x');
-      if (xBtn) {
-        // if any modal open, close it
-        if (document.querySelector('.modal-overlay')) {
-          closeAllModals();
-          return;
-        }
-        const target = xBtn.getAttribute('data-back');
-        if (target) showScreen(target);
-        return;
-      }
-      // modal internal close buttons (data-close)
-      const closeAttr = e.target.getAttribute && e.target.getAttribute('data-close');
-      if (closeAttr) {
-        closeModal(closeAttr);
-      }
-    });
-
-    // ==== Modal management (template cloning) ====
-    function openModalSim(name) {
-      // if modal already open, do nothing
-      if (document.querySelector('[data-modal="'+name+'"]')) return;
-      const map = {
-        'modal-qr':'tpl-modal-qr',
-        'modal-scan':'tpl-modal-scan',
-        'modal-selfie':'tpl-modal-selfie',
-        'modal-terms':'tpl-modal-terms',
-        'modal-share':'tpl-modal-share',
-        'modal-rescue':'tpl-modal-rescue'
-      }[name];
-      if (!map) return;
-      const tpl = document.getElementById(map);
-      if (!tpl) return;
-      const node = tpl.content.cloneNode(true);
-      document.getElementById('modal-root').appendChild(node);
-
-      // clicking overlay outside card closes modal
-      const overlay = document.querySelector('[data-modal="'+name+'"]');
-      overlay.addEventListener('click', function(ev){
-        if (ev.target === overlay) closeModal(name);
-      });
-    }
-
-    function closeModal(name) {
-      const el = document.querySelector('[data-modal="'+name+'"]');
-      if (el) el.remove();
-    }
-
-    function closeAllModals() {
-      document.querySelectorAll('.modal-overlay').forEach(m => m.remove());
-    }
-
-    // ==== Map hotspots (toast messages) ====
-    const infomap = document.getElementById('infomap');
-    if (infomap) {
-      infomap.querySelectorAll('.hotspot').forEach(h => {
-        h.style.fill = 'transparent';
-        h.style.stroke = '#0b84ff';
-        h.style.strokeWidth = 2;
-        h.addEventListener('click', () => {
-          const title = h.getAttribute('data-title') || 'Promoción';
-          showMapToast(title);
-        });
-      });
-    }
-
-    let toastTimer = null;
-    function showMapToast(text) {
-      const toast = document.getElementById('map-toast');
-      toast.textContent = text;
-      toast.classList.remove('d-none');
-      toast.classList.add('show');
-      // position center-top of map-wrapper
-      // auto-hide after 2500ms
-      if (toastTimer) clearTimeout(toastTimer);
-      toastTimer = setTimeout(hideMapToast, 2500);
-    }
-    function hideMapToast() {
-      const toast = document.getElementById('map-toast');
-      if (!toast) return;
-      toast.classList.remove('show');
-      toast.classList.add('d-none');
-      if (toastTimer) { clearTimeout(toastTimer); toastTimer = null; }
-    }
-
-    // helper to remove modals when back/forward
-    window.addEventListener('popstate', () => { closeAllModals(); });
-
-    // start on home
-    document.addEventListener('DOMContentLoaded', () => {
-      showScreen('screen-home');
-    });
   </script>
 
-  <!-- bootstrap JS (optional, used only if needed) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
