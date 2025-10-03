@@ -1,22 +1,23 @@
-/* Estilos para maqueta móvil - iPhone 15 aprox. ancho: 390px */ 
+/* Estilos para maqueta móvil - iPhone 15 aprox. ancho: 390px */
 :root{
   --primary: #254bff;
   --muted: #f1f3f7;
-  --accent: #2b71ff;
 }
 
 /* Phone container */
 .phone {
   width: 390px;             /* ancho tipo iPhone */
-  min-height: 844px;        /* altura aproximada */
+  min-height: 844px;        /* altura aproximada iPhone 15 */
   border-radius: 18px;
   margin: 28px 8px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 /* Cabecera */
+header { padding: 10px 12px; }
 .brand {
   font-weight: 700;
   color: white;
@@ -29,9 +30,10 @@
 .powered {
   font-size: 12px;
   color: #6c757d;
+  margin-top: 6px;
 }
 
-/* Main area (scroll) */
+/* Main area */
 .screen-wrap {
   flex: 1 1 auto;
   overflow-y: auto;
@@ -43,7 +45,7 @@
 .screen {
   display: none;
   min-height: 560px;
-  padding-top: 12px;
+  padding-top: 8px;
 }
 .screen.active { display: block; }
 
@@ -51,7 +53,7 @@
 .spacer { height: 70px; }
 .version { font-size: 11px; color: #95a1b3; text-align: right; margin-top: 12px; }
 
-/* Buttons styling (approx image) */
+/* Buttons matching look */
 .btn-lg { border-radius: 14px; padding: 12px 18px; font-weight: 700; }
 .btn-light { background: #f7f9fc; }
 .btn-primary { background: var(--primary); border: none; }
@@ -65,7 +67,7 @@
   z-index: 30;
 }
 
-/* form head (back) */
+/* small form head */
 .form-head {
   display: flex;
   align-items: center;
@@ -94,6 +96,7 @@
   border-radius: 10px;
   overflow: hidden;
   border: 1px solid #e6eefb;
+  background: #f2f5f9;
 }
 #svgMap { height: 220px; display: block; }
 
@@ -109,7 +112,7 @@
 /* Bank card */
 .bank-card{ border: 1px solid #e6eefb; border-radius: 8px; background: #fff; }
 
-/* Modal overlay */
+/* Modal overlay (custom app modals) */
 .app-modal{
   position: fixed;
   left: 0; top: 0; right: 0; bottom: 0;
@@ -140,8 +143,7 @@
 .small{ font-size: 12px; }
 .map-card-text{ font-size: 12px; fill: #333; }
 
-/* responsive touches */
+/* responsive ajust */
 @media (max-width: 420px){
   .phone { width: calc(100% - 24px); min-height: 820px; margin: 14px; }
 }
-
