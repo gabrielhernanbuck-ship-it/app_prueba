@@ -1,4 +1,4 @@
-/* Estilos para maqueta móvil - iPhone 15 aprox. ancho: 390px */
+/* Estilos para maqueta móvil - iPhone 15 aprox. ancho: 390px */ 
 :root{
   --primary: #254bff;
   --muted: #f1f3f7;
@@ -144,3 +144,4 @@
 @media (max-width: 420px){
   .phone { width: calc(100% - 24px); min-height: 820px; margin: 14px; }
 }
+
