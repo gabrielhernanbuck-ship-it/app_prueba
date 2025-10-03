@@ -1,142 +1,146 @@
-/* 🧼 Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* Estilos para maqueta móvil - iPhone 15 aprox. ancho: 390px */
+:root{
+  --primary: #254bff;
+  --muted: #f1f3f7;
+  --accent: #2b71ff;
 }
 
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background: #f4f7fb;
-  color: #333;
+/* Phone container */
+.phone {
+  width: 390px;             /* ancho tipo iPhone */
+  min-height: 844px;        /* altura aproximada */
+  border-radius: 18px;
+  margin: 28px 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-/* 📱 Pantallas */
+/* Cabecera */
+.brand {
+  font-weight: 700;
+  color: white;
+  background: var(--primary);
+  display: inline-block;
+  padding: 10px 28px;
+  border-radius: 10px;
+  font-size: 20px;
+}
+.powered {
+  font-size: 12px;
+  color: #6c757d;
+}
+
+/* Main area (scroll) */
+.screen-wrap {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 18px;
+}
+
+/* Each screen */
 .screen {
   display: none;
-  height: 100vh;
-  max-width: 480px;
-  margin: 0 auto;
+  min-height: 560px;
+  padding-top: 12px;
+}
+.screen.active { display: block; }
+
+/* utility */
+.spacer { height: 70px; }
+.version { font-size: 11px; color: #95a1b3; text-align: right; margin-top: 12px; }
+
+/* Buttons styling (approx image) */
+.btn-lg { border-radius: 14px; padding: 12px 18px; font-weight: 700; }
+.btn-light { background: #f7f9fc; }
+.btn-primary { background: var(--primary); border: none; }
+
+/* Top-right close X */
+.btn-close.top-right {
+  position: absolute;
+  right: 18px;
+  top: 12px;
+  transform: none;
+  z-index: 30;
+}
+
+/* form head (back) */
+.form-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 2px;
+}
+
+/* Success */
+.success-icon { color: #2b71ff; }
+
+/* History box */
+.history-box{
+  max-height: 220px;
+  overflow-y: auto;
+  border: 1px solid #e2e8f0;
+  padding: 8px;
+  border-radius: 8px;
   background: #fff;
-  overflow: hidden;
 }
+.history-item{ padding: 8px; border-bottom: 1px dashed #eef2f6; }
 
-.screen.active {
-  display: block;
-}
-
-.header {
-  background: linear-gradient(135deg, #4b9cd3, #1976d2);
-  color: #fff;
-  text-align: center;
-  padding: 15px;
-  position: relative;
-}
-
-.header h2 {
-  font-size: 1.5rem;
-}
-
-.close-btn {
-  position: absolute;
-  right: 15px;
-  top: 15px;
-  font-size: 1.6rem;
-  cursor: pointer;
-}
-
-.content {
-  padding: 20px;
-}
-
-/* 🗺️ Mapa */
-.map-container {
-  position: relative;
+/* Map wrap */
+.map-wrap{
   width: 100%;
-  height: 320px;
-  background: linear-gradient(135deg, #cce5ff, #e3f2fd);
-  border-radius: 15px;
+  height: 220px;
+  border-radius: 10px;
   overflow: hidden;
-  margin-bottom: 20px;
+  border: 1px solid #e6eefb;
+}
+#svgMap { height: 220px; display: block; }
+
+/* promo cards list */
+.promo-card{
+  border: 1px solid #e6eefb;
+  padding: 10px;
+  border-radius: 8px;
+  background: #fff;
+  margin-bottom: 8px;
 }
 
-.map-zone {
-  position: absolute;
-  width: 45%;
-  height: 45%;
-  border-radius: 10px;
-  color: #fff;
-  font-weight: bold;
-  text-align: center;
-  padding-top: 20px;
-  cursor: pointer;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s;
+/* Bank card */
+.bank-card{ border: 1px solid #e6eefb; border-radius: 8px; background: #fff; }
+
+/* Modal overlay */
+.app-modal{
+  position: fixed;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(12,18,34,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+.app-modal .modal-dialog{ width: 92%; max-width: 380px; }
+.app-modal .modal-content{ border-radius: 12px; background: #fff; }
+
+/* Camera simulation box */
+.camera-box{
+  height: 160px;
+  border-radius: 8px;
+  border: 1px dashed #cfe2ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6c757d;
 }
 
-.map-zone span {
-  display: block;
-  margin-top: 5px;
-  font-size: 1rem;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 5px;
-  padding: 2px 5px;
-}
+/* Balance block */
+.balance-block{ padding: 8px; border-radius: 8px; background: rgba(37,75,255,0.06); }
 
-.map-zone:hover {
-  transform: scale(1.05);
-}
+/* small details */
+.small{ font-size: 12px; }
+.map-card-text{ font-size: 12px; fill: #333; }
 
-.zone1 {
-  top: 10%;
-  left: 5%;
-  background: #42a5f5;
-}
-
-.zone2 {
-  top: 10%;
-  right: 5%;
-  background: #66bb6a;
-}
-
-.zone3 {
-  bottom: 10%;
-  left: 5%;
-  background: #ff7043;
-}
-
-.zone4 {
-  bottom: 10%;
-  right: 5%;
-  background: #ab47bc;
-}
-
-/* 🧰 Botones */
-.btn {
-  font-size: 1.1rem;
-  border-radius: 10px;
-  padding: 12px;
-}
-
-/* 📢 Modal */
-.modal-content {
-  border-radius: 15px;
-}
-
-.modal-header {
-  background: #1976d2;
-  color: #fff;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-}
-
-.modal-body {
-  font-size: 1.2rem;
-  padding: 20px;
-}
-
-@media (max-width: 480px) {
-  .map-container {
-    height: 280px;
-  }
+/* responsive touches */
+@media (max-width: 420px){
+  .phone { width: calc(100% - 24px); min-height: 820px; margin: 14px; }
 }
