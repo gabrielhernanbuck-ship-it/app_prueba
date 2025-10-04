@@ -1,16 +1,16 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ARGEN-PAY — Prototipo Móvil</title>
 
-  <!-- Bootstrap & FontAwesome (CDN) -->
+  <!-- Bootstrap & FontAwesome -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
   <!-- Custom styles -->
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="bg-light">
 
@@ -22,11 +22,15 @@
       <div class="powered">Powered By BANCO X</div>
     </header>
 
-    <!-- ---------- PANTALLA: HOME / INICIO ---------- -->
+    <!-- ---------- PANTALLA: HOME / INICIO (Pantalla A) ---------- -->
     <main id="screen-home" class="screen p-3 active">
       <div class="d-grid gap-3">
-        <button class="btn btn-primary btn-lg" data-nav="screen-login-modal">LOG IN</button>
-        <button class="btn btn-light btn-lg border" data-nav="screen-language">SING IN</button>
+        <!-- LOG IN en pantalla A: deberá comprobar si el usuario ya hizo clic en SIGN IN -->
+        <button id="btn-home-login" class="btn btn-primary btn-lg">LOG IN</button>
+
+        <!-- SIGN IN: abre pantalla de idioma (Pantalla B) y marca que se inició sign in -->
+        <button id="btn-signin-home" class="btn btn-light btn-lg border" data-nav="screen-language">SIGN IN</button>
+
         <button class="btn btn-light btn-lg border" data-nav="screen-cash">CASH IN/OUT</button>
       </div>
       <div class="version">Versión 1.0</div>
@@ -37,7 +41,7 @@
     <section id="screen-language" class="screen p-3">
       <h5 class="text-center mt-2">Elija un idioma para continuar...</h5>
       <div class="d-grid gap-3 mt-3">
-        <!-- Disabled-style languages: open modal "idioma no disponible" -->
+        <!-- Disabled-style languages open modal "idioma no disponible" -->
         <button class="btn btn-secondary btn-lg disabled-lang" data-bs-toggle="modal" data-bs-target="#modal-lang-unavailable">INGLÉS</button>
 
         <!-- Español: activo y permite avanzar -->
@@ -61,7 +65,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <hr/>
-          <p>Este idioma aún no se encuentra disponible.</p>
+          <p>Este idioma aun no está disponible.</p>
           <div class="text-end">
             <button class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
           </div>
@@ -72,7 +76,7 @@
     <!-- Screen C: Signup form (datos personales) -->
     <section id="screen-signup-form" class="screen p-3">
       <h5 class="text-center">Bienvenido a ARGENPAY!</h5>
-      <form id="signup-form" class="mt-3">
+      <form id="signup-form" class="mt-3" autocomplete="off">
         <div class="mb-2">
           <input required type="text" class="form-control" placeholder="Nombre Completo">
         </div>
@@ -98,7 +102,7 @@
             <i class="fa-solid fa-id-card-clip"></i> Escanear Pasaporte o ID
           </button>
 
-          <!-- Tomar una Selfie -> DEBE ABRIR UN MODAL (no navegar) -->
+          <!-- Tomar una Selfie -> ABRE UN MODAL (no navega) -->
           <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modal-selfie">
             <i class="fa-solid fa-camera"></i> Tomar una Selfie
           </button>
@@ -106,7 +110,7 @@
 
         <div class="mt-3 d-flex justify-content-between">
           <button type="button" class="btn btn-secondary" data-nav="screen-language">&lt; VOLVER</button>
-          <!-- Al enviar el formulario, ahora AVANZAMOS a la pantalla D (no validamos terminos aquí) -->
+          <!-- Al enviar el formulario, AVANZAMOS a la pantalla D (no validamos terminos aquí) -->
           <button type="submit" class="btn btn-primary">CONTINUAR</button>
         </div>
       </form>
@@ -123,10 +127,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <hr/>
-          <p>Cámara activada para escanear documento (Simulación).</p>
-          <div class="text-center mb-2">
-            <div class="camera-placeholder border rounded p-4">[Vista de cámara simulada]</div>
-          </div>
+          <p>Cámara activada para escanear documento. (Simulación)</p>
           <div class="text-end">
             <button class="btn btn-primary" data-bs-dismiss="modal">Escanear y continuar</button>
           </div>
@@ -143,7 +144,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <hr/>
-          <p>Cámara activada: Acerca tu rostro para validar tu biometria (Simulación).</p>
+          <p>Tomá una foto tipo selfie para validar identidad. (Simulación)</p>
           <div class="text-center mb-2">
             <div class="camera-placeholder border rounded p-4">[Vista de cámara simulada]</div>
           </div>
@@ -163,7 +164,7 @@
       <form id="currency-form" class="mt-3">
         <div class="form-check currency-option">
           <input class="form-check-input" type="radio" name="currency" id="currency-usd" value="USD">
-          <label class="form-check-label" for="currency-usd">DÓLAR</label>
+          <label class="form-check-label" for="currency-usd">USDOLAR</label>
         </div>
         <div class="form-check currency-option">
           <input class="form-check-input" type="radio" name="currency" id="currency-eur" value="EUR">
@@ -171,7 +172,7 @@
         </div>
 
         <div class="mt-3">
-          <label>Introduzca fecha de ingreso y salida al país:</label>
+          <label>Ingrese fecha de ingreso y salida:</label>
           <div class="d-flex gap-2">
             <input required type="date" class="form-control" id="date-in">
             <input required type="date" class="form-control" id="date-out">
@@ -207,6 +208,7 @@
     </section>
 
     <!-- ---------- LOG IN flow & Menu (Imagen 2) ---------- -->
+    <!-- Modal: login form (se abre desde home LOG IN solamente si ya hizo click SIGN IN) -->
     <div class="modal fade" id="modal-login" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content p-3">
@@ -224,6 +226,24 @@
       </div>
     </div>
 
+    <!-- Modal: login-warning (si intenta LOG IN sin haber dado SIGN IN en pantalla A) -->
+    <div class="modal fade" id="modal-login-warning" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-3">
+          <div class="d-flex justify-content-between align-items-center">
+            <h6 class="m-0">Atención</h6>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <hr/>
+          <p>Debes completar el registro antes de iniciar sesión.</p>
+          <div class="text-end">
+            <!-- Solo botón cerrar, como pediste -->
+            <button class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- After login -> main menu (screen-login) -->
     <section id="screen-login" class="screen p-3">
       <div class="d-flex justify-content-between align-items-center mb-2">
@@ -232,7 +252,7 @@
       </div>
 
       <div class="balance text-center mb-3">
-        <div class="small">Balance de Cuenta:</div>
+        <div class="small">Balance de Cuenta</div>
         <div class="h3 mb-0">USD 500.00</div>
         <div class="small text-muted">ARS 685,000.00</div>
       </div>
@@ -240,7 +260,7 @@
       <div class="d-grid gap-2">
         <button class="btn btn-outline-primary" data-nav="screen-map">MAPA DE PROMOCIONES</button>
         <button class="btn btn-outline-primary" data-nav="screen-history">HISTORIAL DE PAGOS</button>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-qr">ESCANEAR QR</button>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-qr">QR SCANER</button>
       </div>
 
       <div class="version">Versión 1.0</div>
@@ -255,7 +275,7 @@
             <button class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <hr/>
-          <p>Cámara activada para escanear QR (Simulación).</p>
+          <p>Cámara activada para escanear QR. (Simulación)</p>
           <div class="text-end">
             <button class="btn btn-primary" data-bs-dismiss="modal">Simular escaneo</button>
           </div>
@@ -266,7 +286,7 @@
     <!-- History screen -->
     <section id="screen-history" class="screen p-3">
       <div class="d-flex justify-content-between align-items-center mb-2">
-        <h6>Historial de Movimientos:</h6>
+        <h6>Historial de Movimientos</h6>
         <button class="btn btn-sm btn-light" data-nav="screen-home">X</button>
       </div>
 
@@ -353,11 +373,11 @@
       </div>
 
       <div class="mb-3">
-        <div class="mb-2"><small>Para depositar dinero:</small></div>
-        <button class="btn btn-outline-primary mb-2" id="btn-share-details"><i class="fa-solid fa-share-nodes"></i> COMPARTIR DETALLES</button>
+        <div class="mb-2"><small>To deposit money:</small></div>
+        <button class="btn btn-outline-primary mb-2" id="btn-share-details"><i class="fa-solid fa-share-nodes"></i> SHARE DETAILS</button>
 
-        <div class="mt-3"><small>Para rescatar dinero:</small></div>
-        <button class="btn btn-outline-danger mt-2" id="btn-rescue-order"><i class="fa-solid fa-hand-holding-dollar"></i> ORDEN DE RESCATE</button>
+        <div class="mt-3"><small>To rescue money:</small></div>
+        <button class="btn btn-outline-danger mt-2" id="btn-rescue-order"><i class="fa-solid fa-hand-holding-dollar"></i> RESCUE ORDER</button>
       </div>
 
       <div class="version">Versión 1.0</div>
@@ -385,11 +405,11 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content p-3">
           <div class="d-flex justify-content-between align-items-center">
-            <h6 class="m-0">Order de Rescate:</h6>
+            <h6 class="m-0">Rescue Order</h6>
             <button class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <hr/>
-          <p>Sus fondos restantes serán transferidos nuevamente a su banco de origen, y su cuenta dada de baja. ¿Desea confirmar?</p>
+          <p>Sus fondos restantes serán transferidos nuevamente a su banco de origen. ¿Confirmar?</p>
           <div class="d-flex gap-2 justify-content-end">
             <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
             <button class="btn btn-danger" id="confirm-rescue">Confirmar rescate</button>
@@ -420,7 +440,7 @@
             <button class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <hr/>
-          <p class="small">Apartado con los términos y condiciones (texto de ejemplo). —> Al aceptar, confirma que ha leído y comprende los términos.</p>
+          <p class="small">Aquí van los términos y condiciones (texto de ejemplo) — Al aceptar, confirma que ha leído y comprende los términos.</p>
           <div class="text-end">
             <button class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
           </div>
@@ -435,19 +455,16 @@
   <!-- Bootstrap scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Inline script to handle nav and interactions (actualizado) -->
+  <!-- Inline script to handle nav and interactions (actualizado con lógica LOG IN / SIGN IN en pantalla A) -->
   <script>
+    // Session flag in-memory (resets on reload)
+    let signInInitiated = false;
+
     // Navigation between sections (screens)
     document.querySelectorAll('[data-nav]').forEach(btn => {
       btn.addEventListener('click', (e) => {
         const target = btn.getAttribute('data-nav');
         if (!target) return;
-        // special case for login modal
-        if (target === 'screen-login-modal') {
-          const m = new bootstrap.Modal(document.getElementById('modal-login'));
-          m.show();
-          return;
-        }
         // Hide all screens
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
         // Show target screen
@@ -458,17 +475,41 @@
       });
     });
 
-    // Hook login modal open (LOG IN button has data-nav=screen-login-modal)
-    // (handled above)
+    // SIGN IN (home) -> open language screen and mark signInInitiated = true
+    document.getElementById('btn-signin-home')?.addEventListener('click', (e) => {
+      // mark as initiated for this session
+      signInInitiated = true;
+      // navigation handled by data-nav attribute (click already triggers it)
+      // ensure we still navigate (in case bootstrap prevented default)
+      const target = e.currentTarget.getAttribute('data-nav');
+      if (target) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById(target).classList.add('active');
+      }
+    });
+
+    // LOG IN button on home: if signInInitiated -> open login modal, else show warning modal
+    document.getElementById('btn-home-login')?.addEventListener('click', (e) => {
+      if (signInInitiated) {
+        // open login modal
+        const m = new bootstrap.Modal(document.getElementById('modal-login'));
+        m.show();
+      } else {
+        // open warning modal (solo en pantalla A)
+        const warning = new bootstrap.Modal(document.getElementById('modal-login-warning'));
+        warning.show();
+      }
+    });
 
     // on login proceed: close modal and open screen-login
     document.getElementById('btn-login-proceed')?.addEventListener('click', () => {
-      bootstrap.Modal.getInstance(document.getElementById('modal-login')).hide();
+      const modalEl = document.getElementById('modal-login');
+      bootstrap.Modal.getInstance(modalEl)?.hide();
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
       document.getElementById('screen-login').classList.add('active');
     });
 
-    // SIGNUP FORM submit: ahora AVANZA a la pantalla D (no valida terminos aquí)
+    // SIGNUP FORM submit: avanza a pantalla D
     document.getElementById('signup-form')?.addEventListener('submit', function(ev) {
       ev.preventDefault();
       // Go to currency/date screen (pantalla D)
@@ -550,13 +591,13 @@
       });
     });
 
-    // Set initial active screen to home
+    // Set initial active screen to home on load
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
       document.getElementById('screen-home').classList.add('active');
+      // ensure session flag starts false (resets on reload)
+      signInInitiated = false;
     });
   </script>
 </body>
 </html>
-
-
