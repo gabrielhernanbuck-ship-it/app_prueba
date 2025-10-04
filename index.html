@@ -459,4 +459,53 @@
     });
 
     // CASH: share details button -> open modal that simulates PDF download
-    document.getElementById('btn-share-details')?.addEventListener('cl
+    document.getElementById('btn-share-details')?.addEventListener('click', () => {
+      const m = new bootstrap.Modal(document.getElementById('modal-share-pdf'));
+      m.show();
+    });
+
+    document.getElementById('btn-download-pdf')?.addEventListener('click', () => {
+      // Simulate download
+      // Create a blob and simulate download (so user sees a download in browser)
+      const content = "ARGEN-PAY - Datos Bancarios\\nBeneficiary: Josh Smith\\nAccount Number: XXXXXX\\nSWIFT: BACOARBA";
+      const blob = new Blob([content], { type: 'application/pdf' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'ARGENPAY_Datos_Bancarios.pdf';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      bootstrap.Modal.getInstance(document.getElementById('modal-share-pdf')).hide();
+      // optional small confirmation
+      alert('PDF descargado (simulado). Compartilo con su banco para fondear su billetera.');
+    });
+
+    // Rescue order
+    document.getElementById('btn-rescue-order')?.addEventListener('click', () => {
+      const m = new bootstrap.Modal(document.getElementById('modal-rescue'));
+      m.show();
+    });
+    document.getElementById('confirm-rescue')?.addEventListener('click', () => {
+      bootstrap.Modal.getInstance(document.getElementById('modal-rescue')).hide();
+      const done = new bootstrap.Modal(document.getElementById('modal-rescue-done'));
+      done.show();
+    });
+
+    // Close buttons with X in top-right: many Screens have a small 'X' mapped to "return to initial screen"
+    document.querySelectorAll('.btn-sm.btn-light').forEach(xbtn => {
+      xbtn.addEventListener('click', () => {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('screen-home').classList.add('active');
+      });
+    });
+
+    // Set initial active screen to home
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById('screen-home').classList.add('active');
+    });
+  </script>
+</body>
+</html>
