@@ -1,149 +1,99 @@
-/* Estilos para maqueta móvil - iPhone 15 aprox. ancho: 390px */
-:root{
-  --primary: #254bff;
-  --muted: #f1f3f7;
-}
-
-/* Phone container */
-.phone {
-  width: 390px;             /* ancho tipo iPhone */
-  min-height: 844px;        /* altura aproximada iPhone 15 */
+/* Mobile phone wrapper to simulate phone width */
+.phone{
+  width: 380px;            /* typical phone width for prototype */
+  max-width: 95vw;
+  margin-top: 18px;
   border-radius: 18px;
-  margin: 28px 8px;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  position: relative;
+  border: 1px solid rgba(0,0,0,0.06);
 }
 
-/* Cabecera */
-header { padding: 10px 12px; }
-.brand {
-  font-weight: 700;
-  color: white;
-  background: var(--primary);
-  display: inline-block;
-  padding: 10px 28px;
-  border-radius: 10px;
-  font-size: 20px;
-}
-.powered {
-  font-size: 12px;
-  color: #6c757d;
-  margin-top: 6px;
-}
-
-/* Main area */
-.screen-wrap {
-  flex: 1 1 auto;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: 18px;
-}
-
-/* Each screen */
-.screen {
-  display: none;
-  min-height: 560px;
-  padding-top: 8px;
-}
+/* Screens */
+.screen { display: none; min-height: 640px; background: #fff; }
 .screen.active { display: block; }
 
-/* utility */
-.spacer { height: 70px; }
-.version { font-size: 11px; color: #95a1b3; text-align: right; margin-top: 12px; }
+/* Header / brand */
+.brand {
+  background: #2143f0;
+  color: #fff;
+  font-weight: 700;
+  padding: 10px 16px;
+  border-radius: 10px;
+  display: inline-block;
+  font-size: 1.05rem;
+  letter-spacing: 0.5px;
+}
+.powered { font-size: 0.75rem; color: #6b7280; margin-top: 6px; }
 
-/* Buttons matching look */
-.btn-lg { border-radius: 14px; padding: 12px 18px; font-weight: 700; }
-.btn-light { background: #f7f9fc; }
-.btn-primary { background: var(--primary); border: none; }
-
-/* Top-right close X */
-.btn-close.top-right {
-  position: absolute;
-  right: 18px;
-  top: 12px;
-  transform: none;
-  z-index: 30;
+/* Buttons common style */
+.btn-primary {
+  background: #2143f0;
+  border-color: #2143f0;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-weight: 700;
+}
+.btn-secondary, .btn-outline-primary {
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-weight: 600;
+}
+.btn-light.border {
+  background: #eef2ff;
+  border-radius: 10px;
+  color: #111827;
+  font-weight: 700;
 }
 
-/* small form head */
-.form-head {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 2px;
-}
+/* small version text bottom */
+.version { font-size: 0.75rem; color: #4b5563; margin-top: 20px; text-align:right; }
 
-/* Success */
-.success-icon { color: #2b71ff; }
+/* Signup form and layout */
+form .form-control { border-radius: 8px; padding: 10px; }
+
+/* Success icon */
+.success-icon { color: #16a34a; }
+
+/* login menu balance */
+.balance .small { color: #6b7280; }
+.profile { font-weight: 600; color: #2143f0; }
 
 /* History box */
-.history-box{
+.history-box {
   max-height: 220px;
   overflow-y: auto;
-  border: 1px solid #e2e8f0;
-  padding: 8px;
-  border-radius: 8px;
-  background: #fff;
-}
-.history-item{ padding: 8px; border-bottom: 1px dashed #eef2f6; }
-
-/* Map wrap */
-.map-wrap{
-  width: 100%;
-  height: 220px;
+  border: 1px solid #e5e7eb;
   border-radius: 10px;
-  overflow: hidden;
-  border: 1px solid #e6eefb;
-  background: #f2f5f9;
+  background: #fbfdff;
 }
-#svgMap { height: 220px; display: block; }
+.history-entry { padding: 10px; border-bottom: 1px dashed rgba(0,0,0,0.04); }
 
-/* promo cards list */
-.promo-card{
-  border: 1px solid #e6eefb;
-  padding: 10px;
-  border-radius: 8px;
-  background: #fff;
-  margin-bottom: 8px;
-}
+/* Map */
+.map-wrapper { width: 100%; height: 220px; border-radius: 12px; overflow: hidden; border:1px solid #e2e8f0; background: #fff; }
+.map-svg { width:100%; height:100%; display:block; }
 
-/* Bank card */
-.bank-card{ border: 1px solid #e6eefb; border-radius: 8px; background: #fff; }
+/* Pin details card */
+#pin-info { border-radius: 8px; background: #fff; }
 
-/* Modal overlay (custom app modals) */
-.app-modal{
-  position: fixed;
-  left: 0; top: 0; right: 0; bottom: 0;
-  background: rgba(12,18,34,0.45);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-}
-.app-modal .modal-dialog{ width: 92%; max-width: 380px; }
-.app-modal .modal-content{ border-radius: 12px; background: #fff; }
+/* promos list */
+.promo-item { padding: 8px 0; border-bottom: 1px solid #f1f5f9; }
 
-/* Camera simulation box */
-.camera-box{
-  height: 160px;
-  border-radius: 8px;
-  border: 1px dashed #cfe2ff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #6c757d;
+/* bank card style */
+.bank-card { border: 2px solid #2143f0; border-radius: 8px; background: #f8fbff; }
+.bank-card div { font-size: 0.85rem; margin: 4px 0; }
+
+/* modal content minor adjustments */
+.modal-content { border-radius: 12px; }
+
+/* small helpers */
+.small { font-size: 0.85rem; }
+
+/* make sure buttons and form elements fit on mobile */
+@media (max-width: 380px){
+  .phone { width: 96vw; }
+  .btn { font-size: 0.95rem; }
+  .brand { font-size: 1rem; }
 }
 
-/* Balance block */
-.balance-block{ padding: 8px; border-radius: 8px; background: rgba(37,75,255,0.06); }
-
-/* small details */
-.small{ font-size: 12px; }
-.map-card-text{ font-size: 12px; fill: #333; }
-
-/* responsive ajust */
-@media (max-width: 420px){
-  .phone { width: calc(100% - 24px); min-height: 820px; margin: 14px; }
-}
+/* adjust UX touches */
+.btn:focus { box-shadow: 0 4px 20px rgba(33,67,240,0.12); outline: none; }
