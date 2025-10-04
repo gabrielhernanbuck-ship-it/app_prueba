@@ -9,7 +9,7 @@
 }
 
 /* Screens */
-.screen { display: none; min-height: 640px; background: #fff; }
+.screen { display: none; min-height: 640px; background: #fff; padding-bottom: 12px; }
 .screen.active { display: block; }
 
 /* Header / brand */
@@ -43,6 +43,23 @@
   border-radius: 10px;
   color: #111827;
   font-weight: 700;
+}
+
+/* Disabled-language style */
+.disabled-lang {
+  background: #f3f4f6;
+  color: #9ca3af;
+  border-color: #e5e7eb;
+  pointer-events: auto;
+  opacity: 0.9;
+  box-shadow: none;
+}
+
+/* highlight Español button */
+.btn-esp {
+  background: #2143f0;
+  color: #fff;
+  border-color: #2143f0;
 }
 
 /* small version text bottom */
@@ -84,6 +101,12 @@ form .form-control { border-radius: 8px; padding: 10px; }
 
 /* modal content minor adjustments */
 .modal-content { border-radius: 12px; }
+
+/* currency radio option spacing */
+.currency-option { margin: 8px 0; font-weight: 600; }
+
+/* camera placeholder */
+.camera-placeholder { height: 120px; display:flex; align-items:center; justify-content:center; color:#6b7280; background:#f1f5f9; }
 
 /* small helpers */
 .small { font-size: 0.85rem; }
