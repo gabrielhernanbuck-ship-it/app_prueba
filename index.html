@@ -1,523 +1,462 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ARGEN-PAY — Prototipo Móvil</title>
 
-  <!-- Bootstrap 5 -->
+  <!-- Bootstrap & FontAwesome -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a2d9b2f3d6.js" crossorigin="anonymous"></script>
 
-  <!-- CSS externo -->
-  <link rel="stylesheet" href="style.css">
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-light d-flex justify-content-center align-items-start">
+<body class="bg-light">
 
-  <!-- Contenedor tipo "pantalla móvil" -->
-  <div id="phone" class="phone shadow-sm bg-white position-relative">
-    <!-- Header -->
-    <header class="py-2 text-center position-relative">
+  <!-- Phone viewport wrapper to simulate mobile device width -->
+  <div class="phone mx-auto shadow-sm bg-white">
+    <!-- Header common (logo area) -->
+    <header class="py-3 text-center">
       <div class="brand">ARGEN-PAY</div>
       <div class="powered">Powered By BANCO X</div>
     </header>
 
-    <!-- Contenedor SPA -->
-    <main class="screen-wrap p-3">
-
-      <!-- ---------------------------
-           PANTALLA A - MENU PRINCIPAL
-           --------------------------- -->
-      <section id="screen-home" class="screen active">
-        <div class="spacer"></div>
-        <div class="d-grid gap-3">
-          <button class="btn btn-primary btn-lg" data-target="screen-login-entry">LOG IN</button>
-          <button class="btn btn-light btn-lg border" data-target="screen-lang">SING IN</button>
-          <button class="btn btn-light btn-lg border" data-target="screen-cash-entry">CASH IN/OUT</button>
-        </div>
-        <div class="version">Versión 1.0</div>
-      </section>
-
-      <!-- ---------------------------
-           SIGN IN FLOW (IMAGEN 1)
-           --------------------------- -->
-
-      <!-- PANTALLA B - Elegir idioma -->
-      <section id="screen-lang" class="screen">
-        <button class="btn-close top-right" data-target="screen-home" title="Cerrar"></button>
-        <h5 class="mt-2 text-center">Eliga un idioma para continuar...</h5>
-        <div class="mt-4 d-grid gap-3">
-          <button class="btn btn-light btn-lg border" data-target="screen-signup-form">INGLÉS</button>
-          <button class="btn btn-light btn-lg border" data-target="screen-signup-form">ESPAÑOL</button>
-          <button class="btn btn-light btn-lg border" data-target="screen-signup-form">PORTUGUES</button>
-          <button class="btn btn-light btn-lg border" data-target="screen-signup-form">FRANCES</button>
-        </div>
-        <div class="version">Versión 1.0</div>
-      </section>
-
-      <!-- PANTALLA C - Formulario de registro -->
-      <section id="screen-signup-form" class="screen">
-        <div class="form-head">
-          <button class="btn btn-outline-secondary btn-sm me-2" data-target="screen-lang">&lt; VOLVER</button>
-          <h6 class="d-inline-block ms-2">Bienvenido a ARGENPAY!</h6>
-        </div>
-
-        <form id="signupForm" class="mt-3" onsubmit="event.preventDefault(); showScreen('screen-currency')">
-          <div class="mb-2"><input class="form-control form-control-sm" placeholder="Nombre Completo" required></div>
-          <div class="mb-2"><input class="form-control form-control-sm" placeholder="Apellido" required></div>
-          <div class="mb-2"><input class="form-control form-control-sm" placeholder="Ingresar correo electrónico" type="email" required></div>
-          <div class="mb-2"><input class="form-control form-control-sm" placeholder="Ingresar teléfono" required></div>
-          <div class="mb-2"><input class="form-control form-control-sm" placeholder="Ingresar una contraseña" type="password" required></div>
-          <div class="mb-2"><input class="form-control form-control-sm" placeholder="Repetir la contraseña" type="password" required></div>
-
-          <div class="d-grid gap-2 mt-3">
-            <button type="button" class="btn btn-outline-primary" id="scan-passport">Escanear Pasaporte o ID</button>
-            <button type="button" class="btn btn-outline-primary" id="take-selfie">Tomar una Selfie</button>
-          </div>
-
-          <div class="d-flex justify-content-between mt-3">
-            <button type="button" class="btn btn-light" data-target="screen-lang">&lt; VOLVER</button>
-            <button type="submit" class="btn btn-primary">CONTINUAR</button>
-          </div>
-        </form>
-        <div class="version">Versión 1.0</div>
-      </section>
-
-      <!-- PANTALLA D - Selección de moneda y fechas -->
-      <section id="screen-currency" class="screen">
-        <button class="btn-close top-right" data-target="screen-home" title="Cerrar"></button>
-
-        <h6 class="mt-2">Elija la moneda con la que operara:</h6>
-        <div class="d-flex gap-2 my-2">
-          <button class="btn btn-light flex-fill">ODOLAR</button>
-          <button class="btn btn-light flex-fill">O EURO</button>
-        </div>
-
-        <label class="form-label small mt-2">Ingrese fecha de ingreso y salida:</label>
-        <div class="d-flex gap-2">
-          <input type="date" class="form-control form-control-sm">
-          <input type="date" class="form-control form-control-sm">
-        </div>
-
-        <div class="mt-3 small">
-          <a href="#" class="link-primary" id="leerTerminos">Leer Términos</a>
-          <div class="form-check mt-2">
-            <input class="form-check-input" type="checkbox" id="acepto">
-            <label class="form-check-label" for="acepto"> Entiendo y acepto.</label>
-          </div>
-        </div>
-
-        <div class="d-flex justify-content-between mt-3">
-          <button class="btn btn-light" data-target="screen-signup-form">&lt; VOLVER</button>
-          <button class="btn btn-primary" id="finishSignup">CONTINUAR</button>
-        </div>
-        <div class="version">Versión 1.0</div>
-      </section>
-
-      <!-- PANTALLA E - Éxito -->
-      <section id="screen-success" class="screen">
-        <button class="btn-close top-right" data-target="screen-home" title="Cerrar"></button>
-        <div class="success-icon my-4 text-center"><i class="fa-solid fa-circle-check fa-4x"></i></div>
-        <h5 class="text-center">¡Felicitaciones, su información ha sido cargada exitosamente!</h5>
-        <p class="text-center small mt-3">Le enviaremos una notificación cuando su perfil esté activo y su cuenta esté lista para recibir fondos.</p>
-        <div class="text-center mt-3">
-          <button class="btn btn-primary" data-target="screen-home">Volver al inicio</button>
-        </div>
-        <div class="version">Versión 1.0</div>
-      </section>
-
-      <!-- ---------------------------
-           LOG IN FLOW (IMAGEN 2)
-           --------------------------- -->
-
-      <!-- PANTALLA LOG IN (modal de credenciales) - se abre sobre home -->
-      <section id="screen-login-entry" class="screen">
-        <div class="spacer"></div>
-
-        <!-- botón para abrir modal con campos 'documento' y 'contraseña' -->
-        <div class="d-grid gap-3">
-          <button class="btn btn-primary btn-lg" id="openLoginModal">Ingresar (Abrir login)</button>
-          <button class="btn btn-light btn-lg border" data-target="screen-home">Cancelar</button>
-        </div>
-        <div class="version">Versión 1.0</div>
-      </section>
-
-      <!-- Modal login real (bootstrap modal visual) -->
-      <div class="modal fade" id="modalLogin" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-sm modal-dialog-centered">
-          <div class="modal-content p-3">
-            <div class="d-flex justify-content-between align-items-center">
-              <strong>Ingresar</strong>
-              <button class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-            </div>
-            <div class="mt-3">
-              <label class="form-label small">Documento</label>
-              <input class="form-control form-control-sm" id="login-doc" />
-            </div>
-            <div class="mt-2">
-              <label class="form-label small">Contraseña</label>
-              <input class="form-control form-control-sm" id="login-pass" type="password"/>
-            </div>
-            <div class="mt-3 d-grid">
-              <button class="btn btn-primary" id="btnDoLogin">Ingresar</button>
-            </div>
-          </div>
-        </div>
+    <!-- ---------- PANTALLA: HOME / INICIO (used in IMAGENES A of each set) ---------- -->
+    <main id="screen-home" class="screen p-3 active">
+      <div class="d-grid gap-3">
+        <button class="btn btn-primary btn-lg" data-nav="screen-login-modal">LOG IN</button>
+        <button class="btn btn-light btn-lg border" data-nav="screen-language">SING IN</button>
+        <button class="btn btn-light btn-lg border" data-nav="screen-cash">CASH IN/OUT</button>
       </div>
-
-      <!-- PANTALLA MENU LOGUEADO (imagen 2 - pantalla B) -->
-      <section id="screen-login-menu" class="screen">
-        <button class="btn-close top-right" data-target="screen-home" title="Cerrar"></button>
-
-        <div class="balance-block text-center my-3">
-          <div class="small">Perfil <i class="fa-regular fa-user-circle"></i></div>
-          <h4 class="mb-0">USD 500.00</h4>
-          <small class="text-muted d-block">ARS 685,000.00</small>
-        </div>
-
-        <div class="d-grid gap-2">
-          <button class="btn btn-light border" data-target="screen-promomap">MAPA DE PROMOCIONES</button>
-          <button class="btn btn-light border" data-target="screen-history">HISTORIAL DE PAGOS</button>
-          <button class="btn btn-primary" id="openQR">QR SCANER</button>
-        </div>
-        <div class="version">Versión 1.0</div>
-      </section>
-
-      <!-- PANTALLA HISTORIAL (imagen2 - pantalla C) -->
-      <section id="screen-history" class="screen">
-        <div class="form-head">
-          <button class="btn btn-outline-secondary btn-sm me-2" data-target="screen-login-menu">&lt; VOLVER</button>
-          <h6 class="d-inline-block ms-2">Historial de Movimientos</h6>
-        </div>
-
-        <div class="history-box mt-3">
-          <div class="history-item">
-            <div class="small text-muted">17/08/2025 - Débito</div>
-            <div><strong>ARS</strong> 30,000 <span class="text-muted">USD 22.67 ?</span></div>
-          </div>
-          <div class="history-item">
-            <div class="small text-muted">15/08/2025 - Débito</div>
-            <div><strong>ARS</strong> 6,500 <span class="text-muted">USD 37.78 ?</span></div>
-          </div>
-        </div>
-
-        <div class="mt-3">
-          <button class="btn btn-light w-100" data-target="screen-login-menu">VOLVER AL MENÚ PRINCIPAL</button>
-        </div>
-      </section>
-
-      <!-- PANTALLA MAPA (imagen2 - pantalla D) -->
-      <section id="screen-promomap" class="screen">
-        <button class="btn-close top-right" data-target="screen-login-menu" title="Cerrar"></button>
-        <h6 class="mt-2">MAPA DE PROMOCIONES</h6>
-
-        <div class="map-wrap mt-3">
-          <svg id="svgMap" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" class="w-100">
-            <rect x="0" y="0" width="800" height="500" fill="#f2f5f9" rx="12" />
-            <path d="M40 120 C 180 40, 320 40, 460 120" stroke="#d0d7e2" stroke-width="10" fill="none" stroke-linecap="round"/>
-            <path d="M60 320 C220 260, 420 260, 740 320" stroke="#d0d7e2" stroke-width="8" fill="none" stroke-linecap="round"/>
-            <!-- markers (clickeables) -->
-            <g class="marker" data-id="1" transform="translate(170,110)" cursor="pointer">
-              <circle cx="0" cy="0" r="14" fill="#2b71ff"></circle>
-            </g>
-            <g class="marker" data-id="2" transform="translate(420,90)" cursor="pointer">
-              <circle cx="0" cy="0" r="14" fill="#ff6b6b"></circle>
-            </g>
-            <g class="marker" data-id="3" transform="translate(600,210)" cursor="pointer">
-              <circle cx="0" cy="0" r="14" fill="#ffd166"></circle>
-            </g>
-            <g class="marker" data-id="4" transform="translate(300,340)" cursor="pointer">
-              <circle cx="0" cy="0" r="14" fill="#6be7b9"></circle>
-            </g>
-          </svg>
-        </div>
-
-        <div class="mt-3">
-          <div id="inlinePromoList" class="d-grid gap-2">
-            <!-- pequeñas tarjetas (además del detalle) -->
-            <div class="promo-card">
-              <div class="d-flex justify-content-between"><strong>Tienda: "El Ateneo"</strong><span>10% OFF</span></div>
-              <p class="small mb-0">Descuento en librería: válido solo para turistas.</p>
-            </div>
-            <div class="promo-card">
-              <div class="d-flex justify-content-between"><strong>Atracción: "Jardín Japonés"</strong><span>15% OFF</span></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="version">Versión 1.0</div>
-      </section>
-
-      <!-- PANTALLA DETALLE PROMOCION (imagen2 -> detalle similar imagen3) -->
-      <section id="screen-promo-detail" class="screen">
-        <button class="btn-close top-right" data-target="screen-promomap" title="Cerrar"></button>
-
-        <div class="detail-head d-flex align-items-center gap-2">
-          <button class="btn btn-outline-secondary btn-sm" data-target="screen-promomap">&lt; VOLVER</button>
-          <h6 class="mb-0">Detalle de Promoción</h6>
-        </div>
-
-        <div id="promoDetailCard" class="promo-card mt-3">
-          <!-- contenido dinámico -->
-        </div>
-
-        <div class="version">Versión 1.0</div>
-      </section>
-
-      <!-- QR modal (simulado) -->
-      <div class="app-modal d-none" id="modalCamera">
-        <div class="modal-dialog">
-          <div class="modal-content p-3">
-            <div class="d-flex justify-content-between align-items-center">
-              <strong>Cámara activada para escanear QR</strong>
-              <button class="btn-close" id="closeCamera"></button>
-            </div>
-            <div class="p-3 text-center">
-              <div class="camera-box mb-3">[Simulación Cámara]</div>
-              <button class="btn btn-primary" id="simulateScan">Simular Escaneo</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Modal Términos -->
-      <div class="app-modal d-none" id="modalTerms">
-        <div class="modal-dialog">
-          <div class="modal-content p-3">
-            <div class="d-flex justify-content-between align-items-center">
-              <strong>Términos y Condiciones</strong>
-              <button class="btn-close" id="closeTerms"></button>
-            </div>
-            <div class="p-3 small">
-              Aquí se muestran los términos... (texto ejemplo para maqueta)
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ---------------------------
-           CASH IN/OUT FLOW (IMAGEN 3)
-           --------------------------- -->
-
-      <!-- PANTALLA ENTRY CASH -->
-      <section id="screen-cash-entry" class="screen">
-        <div class="spacer"></div>
-        <div class="d-grid gap-3">
-          <button class="btn btn-primary btn-lg" data-target="screen-cash-details">CASH IN/OUT</button>
-          <button class="btn btn-light btn-lg border" data-target="screen-home">Cancelar</button>
-        </div>
-        <div class="version">Versión 1.0</div>
-      </section>
-
-      <!-- PANTALLA CASH DETAILS -->
-      <section id="screen-cash-details" class="screen">
-        <button class="btn-close top-right" data-target="screen-home" title="Cerrar"></button>
-
-        <div class="bank-card mt-2 p-3">
-          <div class="small text-muted">Datos Bancarios:</div>
-          <div class="mt-2">
-            <div><strong>Beneficiary:</strong> Josh Smith</div>
-            <div><strong>Acount Number:</strong> XXXXXX</div>
-            <div><strong>Country:</strong> Argentina</div>
-            <div><strong>Bank Name:</strong> Banco X</div>
-            <div><strong>SWIFT Code:</strong> BACOARBA</div>
-            <div><strong>Sucursal N°:</strong> 999</div>
-          </div>
-        </div>
-
-        <div class="mt-3 d-grid gap-2">
-          <button class="btn btn-light border" id="shareDetailsBtn"><i class="fa-solid fa-file-arrow-up"></i> Compartir deatlles</button>
-          <button class="btn btn-light border" id="rescueOrderBtn"><i class="fa-solid fa-money-bill-trend-up"></i> Orden de rescate</button>
-        </div>
-        <div class="version">Versión 1.0</div>
-      </section>
-
-      <!-- Modal PDF -->
-      <div class="app-modal d-none" id="modalPDF">
-        <div class="modal-dialog">
-          <div class="modal-content p-3">
-            <div class="d-flex justify-content-between align-items-center">
-              <strong>Descargando PDF</strong>
-              <button class="btn-close" id="closePDF"></button>
-            </div>
-            <div class="p-3 small">
-              Descargando PDF con los datos para facilitarle a su banco y fondear su billetera.
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Modal Rescue -->
-      <div class="app-modal d-none" id="modalRescue">
-        <div class="modal-dialog">
-          <div class="modal-content p-3">
-            <div class="d-flex justify-content-between align-items-center">
-              <strong>Orden de rescate</strong>
-              <button class="btn-close" id="closeRescue"></button>
-            </div>
-            <div class="p-3 small">
-              Sus fondos restantes serán transferidos nuevamente a su banco de origen.
-            </div>
-          </div>
-        </div>
-      </div>
-
+      <div class="version">Versión 1.0</div>
     </main>
+
+    <!-- ---------- SING IN Flow (Imagen 1) ---------- -->
+    <!-- Screen B: language selection -->
+    <section id="screen-language" class="screen p-3">
+      <h5 class="text-center mt-2">Elija un idioma para continuar...</h5>
+      <div class="d-grid gap-3 mt-3">
+        <button class="btn btn-secondary btn-lg" data-nav="screen-signup-form">INGLÉS</button>
+        <button class="btn btn-secondary btn-lg" data-nav="screen-signup-form">ESPAÑOL</button>
+        <button class="btn btn-secondary btn-lg" data-nav="screen-signup-form">PORTUGUES</button>
+        <button class="btn btn-secondary btn-lg" data-nav="screen-signup-form">FRANCES</button>
+      </div>
+      <div class="mt-3 d-flex justify-content-between">
+        <button class="btn btn-outline-secondary" data-nav="screen-home">&lt; VOLVER</button>
+        <div class="version">Versión 1.0</div>
+      </div>
+    </section>
+
+    <!-- Screen C: Signup form (datos personales) -->
+    <section id="screen-signup-form" class="screen p-3">
+      <h5 class="text-center">Bienvenido a ARGENPAY!</h5>
+      <form id="signup-form" class="mt-3">
+        <div class="mb-2">
+          <input required type="text" class="form-control" placeholder="Nombre Completo">
+        </div>
+        <div class="mb-2">
+          <input required type="text" class="form-control" placeholder="Apellido">
+        </div>
+        <div class="mb-2">
+          <input required type="email" class="form-control" placeholder="Ingresar correo electrónico">
+        </div>
+        <div class="mb-2">
+          <input required type="tel" class="form-control" placeholder="Ingresar teléfono">
+        </div>
+        <div class="mb-2">
+          <input required type="password" class="form-control" placeholder="Ingresar contraseña">
+        </div>
+        <div class="mb-2">
+          <input required type="password" class="form-control" placeholder="Repetir la contraseña">
+        </div>
+
+        <div class="d-grid gap-2 mt-2">
+          <!-- Escanear Pasaporte/ID -> modal que dice Cámara habilitada -->
+          <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modal-camera-scan">
+            <i class="fa-solid fa-id-card-clip"></i> Escanear Pasaporte o ID
+          </button>
+          <button type="button" class="btn btn-outline-primary" data-nav="screen-signup-selfie">
+            <i class="fa-solid fa-camera"></i> Tomar una Selfie
+          </button>
+        </div>
+
+        <div class="mt-3 d-flex justify-content-between">
+          <button type="button" class="btn btn-secondary" data-nav="screen-language">&lt; VOLVER</button>
+          <button type="submit" class="btn btn-primary">CONTINUAR</button>
+        </div>
+      </form>
+
+      <div class="version">Versión 1.0</div>
+    </section>
+
+    <!-- Modal: camera scanning (from signup) -->
+    <div class="modal fade" id="modal-camera-scan" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-3">
+          <div class="d-flex justify-content-between align-items-center">
+            <h6 class="m-0">Cámara</h6>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <hr/>
+          <p>Cámara activada para escanear documento. (Simulación)</p>
+          <div class="text-end">
+            <button class="btn btn-primary" data-bs-dismiss="modal">Escanear y continuar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Screen D: currency and dates, terms -->
+    <section id="screen-signup-selfie" class="screen p-3">
+      <h5 class="text-center">Elija la moneda con la que operará:</h5>
+      <div class="d-flex justify-content-around mt-2">
+        <button class="btn btn-outline-primary currency">USDOLAR</button>
+        <button class="btn btn-outline-primary currency">EURO</button>
+      </div>
+
+      <div class="mt-3">
+        <label>Ingrese fecha de ingreso y salida:</label>
+        <div class="d-flex gap-2">
+          <input required type="date" class="form-control">
+          <input required type="date" class="form-control">
+        </div>
+      </div>
+
+      <div class="mt-3">
+        <a href="#" id="leer-terminos" class="d-block">Leer Términos</a>
+        <div class="form-check mt-1">
+          <input class="form-check-input" type="checkbox" id="acepto">
+          <label class="form-check-label" for="acepto">Entiendo y acepto.</label>
+        </div>
+      </div>
+
+      <div class="mt-3 d-flex justify-content-between">
+        <button class="btn btn-secondary" data-nav="screen-signup-form">&lt; VOLVER</button>
+        <button class="btn btn-primary" id="signup-complete">CONTINUAR</button>
+      </div>
+      <div class="version">Versión 1.0</div>
+    </section>
+
+    <!-- Screen E: signup success -->
+    <section id="screen-signup-complete" class="screen p-3 text-center">
+      <div class="success-icon my-4"><i class="fa-solid fa-circle-check fa-4x"></i></div>
+      <h5>¡Felicitaciones, su información ha sido cargada exitosamente!</h5>
+      <p>Le enviaremos una notificación cuando su perfil esté activo y su cuenta lista para recibir fondos.</p>
+      <div class="mt-4 d-flex justify-content-center">
+        <button class="btn btn-outline-secondary" data-nav="screen-home">Cerrar</button>
+      </div>
+      <div class="version">Versión 1.0</div>
+    </section>
+
+    <!-- ---------- LOG IN flow & Menu (Imagen 2) ---------- -->
+    <!-- The "LOG IN" button from home opens a modal with document/password fields (as instruction) -->
+    <div class="modal fade" id="modal-login" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-3">
+          <div class="d-flex justify-content-between align-items-center">
+            <h6 class="m-0">LOG IN</h6>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <hr/>
+          <div class="mb-2"><input class="form-control" placeholder="Documento"></div>
+          <div class="mb-2"><input type="password" class="form-control" placeholder="Contraseña"></div>
+          <div class="d-grid">
+            <button id="btn-login-proceed" class="btn btn-primary">Ingresar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- After login -> main menu (screen-login) -->
+    <section id="screen-login" class="screen p-3">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <div class="profile">Perfil <i class="fa-regular fa-circle-user"></i></div>
+        <button class="btn btn-sm btn-light" data-nav="screen-home">X</button>
+      </div>
+
+      <div class="balance text-center mb-3">
+        <div class="small">Balance de Cuenta</div>
+        <div class="h3 mb-0">USD 500.00</div>
+        <div class="small text-muted">ARS 685,000.00</div>
+      </div>
+
+      <div class="d-grid gap-2">
+        <button class="btn btn-outline-primary" data-nav="screen-map">MAPA DE PROMOCIONES</button>
+        <button class="btn btn-outline-primary" data-nav="screen-history">HISTORIAL DE PAGOS</button>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-qr">QR SCANER</button>
+      </div>
+
+      <div class="version">Versión 1.0</div>
+    </section>
+
+    <!-- QR modal simulate camera activated to scan QR -->
+    <div class="modal fade" id="modal-qr" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-3">
+          <div class="d-flex justify-content-between">
+            <h6 class="m-0">QR Scanner</h6>
+            <button class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <hr/>
+          <p>Cámara activada para escanear QR. (Simulación)</p>
+          <div class="text-end">
+            <button class="btn btn-primary" data-bs-dismiss="modal">Simular escaneo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- History screen (screen-history) -->
+    <section id="screen-history" class="screen p-3">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h6>Historial de Movimientos</h6>
+        <button class="btn btn-sm btn-light" data-nav="screen-home">X</button>
+      </div>
+
+      <div class="history-box p-2 mb-3">
+        <div class="history-entry">
+          <div><small>17/08/2025 - Debit</small></div>
+          <div class="fw-bold">ARS 200.00</div>
+          <div>USD 22.67 <i class="fa-solid fa-question-circle text-muted"></i></div>
+        </div>
+        <div class="history-entry">
+          <div><small>15/08/2025 - Debit</small></div>
+          <div class="fw-bold">ARS 300.00</div>
+          <div>USD 37.78 <i class="fa-solid fa-question-circle text-muted"></i></div>
+        </div>
+      </div>
+
+      <div class="d-grid">
+        <button class="btn btn-outline-secondary" data-nav="screen-login">RETURN TO MAIN MENU</button>
+      </div>
+    </section>
+
+    <!-- Map screen (screen-map) with SVG interactive pins and a list of discounts -->
+    <section id="screen-map" class="screen p-3">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h6>MAPA DE PROMOCIONES</h6>
+        <button class="btn btn-sm btn-light" data-nav="screen-home">X</button>
+      </div>
+
+      <!-- Simple vector map (illustrative). Pins are clickable and show details below -->
+      <div class="map-wrapper mb-2">
+        <svg viewBox="0 0 400 220" class="map-svg" role="img" aria-label="Mapa de la ciudad">
+          <!-- simple river/road shapes -->
+          <rect x="0" y="0" width="400" height="220" fill="#eef5ff"></rect>
+          <path d="M0,120 Q100,60 200,120 T400,120" stroke="#cce0ff" stroke-width="28" fill="none" opacity="0.6"></path>
+
+          <!-- Pins -->
+          <g class="pin" data-info="Tienda: 'El Ateneo' — 10% OFF" transform="translate(80,70)">
+            <circle cx="0" cy="0" r="8" fill="#ff6b6b"></circle>
+          </g>
+
+          <g class="pin" data-info="Atracción: 'Jardín Japonés' — 15% OFF" transform="translate(250,40)">
+            <circle cx="0" cy="0" r="8" fill="#f6b93b"></circle>
+          </g>
+
+          <g class="pin" data-info="Cultura: 'Teatro Colón' — 20% OFF" transform="translate(150,150)">
+            <circle cx="0" cy="0" r="8" fill="#48dbfb"></circle>
+          </g>
+
+          <g class="pin" data-info="Café: 'Las Violetas' — 20% OFF" transform="translate(320,140)">
+            <circle cx="0" cy="0" r="8" fill="#a29bfe"></circle>
+          </g>
+        </svg>
+      </div>
+
+      <div id="pin-info" class="card p-2 mb-2">
+        <strong>Seleccioná un punto en el mapa</strong>
+        <div id="pin-details" class="small text-muted mt-1">Aquí aparecerá la tarjeta con el descuento al tocar un pin.</div>
+      </div>
+
+      <div class="list-promos">
+        <div class="promo-item">Tienda: "El Ateneo" — <span class="badge bg-primary">10% OFF</span></div>
+        <div class="promo-item">Atracción: "Jardín Japonés" — <span class="badge bg-primary">15% OFF</span></div>
+        <div class="promo-item">Cultura: "Teatro Colón" — <span class="badge bg-primary">20% OFF</span></div>
+        <div class="promo-item">Café: "Las Violetas" — <span class="badge bg-primary">20% OFF</span></div>
+      </div>
+
+      <div class="version">Versión 1.0</div>
+    </section>
+
+    <!-- ---------- CASH IN/OUT Flow (Imagen 3) ---------- -->
+    <!-- Screen A: same as home but direct cash button goes to screen-cash -->
+    <!-- Screen B: cash details -->
+    <section id="screen-cash" class="screen p-3">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h6>Cash In/Out</h6>
+        <button class="btn btn-sm btn-light" data-nav="screen-home">X</button>
+      </div>
+
+      <div class="card p-2 mb-3">
+        <div><strong>Datos Bancarios:</strong></div>
+        <div class="bank-card mt-2 p-2">
+          <div><strong>Beneficiary:</strong> Josh Smith</div>
+          <div><strong>Account Number:</strong> XXXXXX</div>
+          <div><strong>Country:</strong> Argentina</div>
+          <div><strong>Bank Name:</strong> Banco X</div>
+          <div><strong>SWIFT Code:</strong> BACOARBA</div>
+          <div><strong>Sucursal N°:</strong> 999</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <div class="mb-2"><small>To deposit money:</small></div>
+        <button class="btn btn-outline-primary mb-2" id="btn-share-details"><i class="fa-solid fa-share-nodes"></i> SHARE DETAILS</button>
+
+        <div class="mt-3"><small>To rescue money:</small></div>
+        <button class="btn btn-outline-danger mt-2" id="btn-rescue-order"><i class="fa-solid fa-hand-holding-dollar"></i> RESCUE ORDER</button>
+      </div>
+
+      <div class="version">Versión 1.0</div>
+    </section>
+
+    <!-- Modal: Share details -> simulate downloading PDF -->
+    <div class="modal fade" id="modal-share-pdf" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-3">
+          <div class="d-flex justify-content-between align-items-center">
+            <h6 class="m-0">Compartir datos</h6>
+            <button class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <hr/>
+          <p>Descargando PDF con los datos para facilitarle a su banco y fondear su billetera.</p>
+          <div class="text-end">
+            <button class="btn btn-primary" id="btn-download-pdf">Descargar PDF</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Rescue order -> simulate confirmation that funds will be transferred back -->
+    <div class="modal fade" id="modal-rescue" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-3">
+          <div class="d-flex justify-content-between align-items-center">
+            <h6 class="m-0">Rescue Order</h6>
+            <button class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <hr/>
+          <p>Sus fondos restantes serán transferidos nuevamente a su banco de origen. ¿Confirmar?</p>
+          <div class="d-flex gap-2 justify-content-end">
+            <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button class="btn btn-danger" id="confirm-rescue">Confirmar rescate</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirmation after rescue -->
+    <div class="modal fade" id="modal-rescue-done" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-3 text-center">
+          <div class="m-3">
+            <i class="fa-solid fa-check-circle fa-3x text-success"></i>
+          </div>
+          <h6>Operación realizada</h6>
+          <p>Sus fondos serán transferidos a su banco de origen. Le notificaremos cuando se complete.</p>
+          <div><button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Generic terms modal (used from signup) -->
+    <div class="modal fade" id="modal-terms" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <div class="modal-content p-3">
+          <div class="d-flex justify-content-between">
+            <h6>Términos y condiciones</h6>
+            <button class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <hr/>
+          <p class="small">Aquí van los términos y condiciones (texto de ejemplo) — Al aceptar, confirma que ha leído y comprende los términos.</p>
+          <div class="text-end">
+            <button class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer spacing -->
+    <div style="height:18px"></div>
   </div>
 
-  <!-- Bootstrap & JS -->
+  <!-- Bootstrap scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- SCRIPT EMBEBIDO: navegación SPA + modales + mapa -->
+  <!-- Inline script to handle nav and interactions -->
   <script>
-    // --- helpers SPA ---
-    function showScreen(id) {
-      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-      const target = document.getElementById(id);
-      if (target) target.classList.add('active');
-      // hide all inline app-modals when changing screens
-      document.querySelectorAll('.app-modal').forEach(m => m.classList.add('d-none'));
-      // reset promo detail content
-      if (id !== 'screen-promo-detail') {
-        const pd = document.getElementById('promoDetailCard');
-        if (pd) pd.innerHTML = '';
-      }
-      // scroll top of phone area
-      document.querySelector('.screen-wrap').scrollTop = 0;
-    }
-
-    // delegate click by data-target
-    document.addEventListener('click', function(e){
-      const btn = e.target.closest('[data-target]');
-      if (!btn) return;
-      const dest = btn.getAttribute('data-target');
-      showScreen(dest);
-    });
-
-    // top-right X buttons: already use data-target attribute; ensure they work if clicked directly
-    document.querySelectorAll('.btn-close.top-right').forEach(b=>{
-      b.addEventListener('click', ()=> {
-        const dest = b.getAttribute('data-target') || 'screen-home';
-        showScreen(dest);
+    // Navigation between sections (screens)
+    document.querySelectorAll('[data-nav]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const target = btn.getAttribute('data-nav');
+        if (!target) return;
+        // Hide all screens
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        // Show target screen
+        const el = document.getElementById(target);
+        if (el) el.classList.add('active');
+        // close any open modals
+        const bsModals = document.querySelectorAll('.modal.show');
+        bsModals.forEach(m => bootstrap.Modal.getInstance(m)?.hide());
       });
     });
 
-    // -----------------------
-    // SIGN IN interactions
-    // -----------------------
-    document.getElementById('scan-passport').addEventListener('click', ()=> {
-      alert('Ventana modal: "Cámara habilitada" (simulado).');
-    });
-    document.getElementById('take-selfie').addEventListener('click', ()=> {
-      alert('Tomar selfie (simulado).');
+    // Hook login modal open
+    document.querySelector('[data-nav="screen-login-modal"]')?.addEventListener('click', () => {
+      const m = new bootstrap.Modal(document.getElementById('modal-login'));
+      m.show();
     });
 
-    document.getElementById('leerTerminos').addEventListener('click', function(ev){
+    // on login proceed: close modal and open screen-login
+    document.getElementById('btn-login-proceed')?.addEventListener('click', () => {
+      bootstrap.Modal.getInstance(document.getElementById('modal-login')).hide();
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById('screen-login').classList.add('active');
+    });
+
+    // Sign up submit simulation -> show next success after clicking CONTINUAR
+    document.getElementById('signup-form')?.addEventListener('submit', function(ev) {
       ev.preventDefault();
-      document.getElementById('modalTerms').classList.remove('d-none');
-    });
-    document.getElementById('closeTerms').addEventListener('click', ()=> {
-      document.getElementById('modalTerms').classList.add('d-none');
-    });
-
-    document.getElementById('finishSignup').addEventListener('click', ()=> {
-      // optional: verify checkbox
-      const acepto = document.getElementById('acepto');
-      if (acepto && !acepto.checked) {
-        alert('Debe tildar "Entiendo y acepto" para continuar (simulado).');
+      // Simple validation
+      if (!document.getElementById('acepto')?.checked) {
+        // If not accepted, go to terms or show alert
+        const termsModal = new bootstrap.Modal(document.getElementById('modal-terms'));
+        termsModal.show();
         return;
       }
-      showScreen('screen-success');
+      // Go to success screen
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById('screen-signup-complete').classList.add('active');
     });
 
-    // -----------------------
-    // LOGIN flow
-    // -----------------------
-    const modalLoginEl = document.getElementById('modalLogin');
-    const bsModalLogin = new bootstrap.Modal(modalLoginEl, { backdrop: 'static', keyboard: false });
-
-    document.getElementById('openLoginModal').addEventListener('click', ()=> {
-      bsModalLogin.show();
+    // terms link
+    document.getElementById('leer-terminos')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      const m = new bootstrap.Modal(document.getElementById('modal-terms'));
+      m.show();
     });
 
-    document.getElementById('btnDoLogin').addEventListener('click', ()=> {
-      // simulo login válido y paso al menu principal logueado
-      bsModalLogin.hide();
-      // show logged-in menu
-      showScreen('screen-login-menu');
-    });
-
-    // QR scanner (simulado modal)
-    document.getElementById('openQR').addEventListener('click', ()=> {
-      document.getElementById('modalCamera').classList.remove('d-none');
-    });
-    document.getElementById('closeCamera').addEventListener('click', ()=> {
-      document.getElementById('modalCamera').classList.add('d-none');
-    });
-    document.getElementById('simulateScan').addEventListener('click', ()=> {
-      alert('QR escaneado (simulado).');
-      document.getElementById('modalCamera').classList.add('d-none');
-    });
-
-    // -----------------------
-    // PROMO MAP interactions
-    // -----------------------
-    document.querySelectorAll('#svgMap .marker').forEach(m => {
-      m.style.cursor = 'pointer';
-      m.addEventListener('click', ()=> {
-        const id = m.getAttribute('data-id');
-        openPromoDetail(id);
-      });
-    });
-
-    function openPromoDetail(id) {
-      // Build detail content based on id
-      const detail = document.getElementById('promoDetailCard');
-      let html = '';
-      if (id === '1') {
-        html = '<div class="d-flex justify-content-between"><strong>Tienda: &quot;El Ateneo&quot;</strong><span>10% OFF</span></div><p class="small mb-2">Descuento en librería: válido solo para turistas.</p><div class="d-grid gap-2 mt-2"><button class="btn btn-primary" data-target="screen-login-menu">Usar Promoción</button><button class="btn btn-light" data-target="screen-promomap">&lt; VOLVER</button></div>';
-      } else if (id === '2') {
-        html = '<div class="d-flex justify-content-between"><strong>Atracción: &quot;Jardín Japonés&quot;</strong><span>15% OFF</span></div><p class="small mb-2">Entrada con descuento para visitantes.</p><div class="d-grid gap-2 mt-2"><button class="btn btn-primary" data-target="screen-login-menu">Ver Más</button><button class="btn btn-light" data-target="screen-promomap">&lt; VOLVER</button></div>';
-      } else if (id === '3') {
-        html = '<div class="d-flex justify-content-between"><strong>Cultura: &quot;Teatro Colón&quot;</strong><span>20% OFF</span></div><p class="small mb-2">Promoción en entradas seleccionadas.</p><div class="d-grid gap-2 mt-2"><button class="btn btn-primary" data-target="screen-login-menu">Ver Disponibilidad</button><button class="btn btn-light" data-target="screen-promomap">&lt; VOLVER</button></div>';
-      } else if (id === '4') {
-        html = '<div class="d-flex justify-content-between"><strong>Café: &quot;Las Violetas&quot;</strong><span>20% OFF</span></div><p class="small mb-2">Café para llevar con descuento.</p><div class="d-grid gap-2 mt-2"><button class="btn btn-primary" data-target="screen-login-menu">Canjear</button><button class="btn btn-light" data-target="screen-promomap">&lt; VOLVER</button></div>';
-      } else {
-        html = '<div>Promoción</div>';
+    // Signup continue button on screen-signup-selfie
+    document.getElementById('signup-complete')?.addEventListener('click', () => {
+      if (!document.getElementById('acepto')?.checked) {
+        const t = new bootstrap.Modal(document.getElementById('modal-terms'));
+        t.show();
+        return;
       }
-      detail.innerHTML = html;
-      showScreen('screen-promo-detail');
-    }
-
-    // -----------------------
-    // CASH flow modals
-    // -----------------------
-    document.getElementById('shareDetailsBtn').addEventListener('click', ()=> {
-      document.getElementById('modalPDF').classList.remove('d-none');
-    });
-    document.getElementById('closePDF').addEventListener('click', ()=> {
-      document.getElementById('modalPDF').classList.add('d-none');
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById('screen-signup-complete').classList.add('active');
     });
 
-    document.getElementById('rescueOrderBtn').addEventListener('click', ()=> {
-      document.getElementById('modalRescue').classList.remove('d-none');
-    });
-    document.getElementById('closeRescue').addEventListener('click', ()=> {
-      document.getElementById('modalRescue').classList.add('d-none');
-    });
-
-    // -----------------------
-    // Utility: close other small app modals when clicking outside
-    // -----------------------
-    document.querySelectorAll('.app-modal').forEach(modal => {
-      modal.addEventListener('click', function(e){
-        if (e.target === modal) modal.classList.add('d-none');
+    // Map pins: click event
+    document.querySelectorAll('.map-svg .pin').forEach(pin => {
+      pin.style.cursor = 'pointer';
+      pin.addEventListener('click', () => {
+        const info = pin.getAttribute('data-info');
+        document.getElementById('pin-details').textContent = info;
       });
     });
 
-    // init to main menu
-    showScreen('screen-home');
-  </script>
-</body>
-</html>
+    // CASH: share details button -> open modal that simulates PDF download
+    document.getElementById('btn-share-details')?.addEventListener('cl
