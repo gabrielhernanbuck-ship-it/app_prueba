@@ -31,7 +31,8 @@
         <!-- SIGN IN: abre pantalla de idioma (Pantalla B) y marca que se inició sign in -->
         <button id="btn-signin-home" class="btn btn-light btn-lg border" data-nav="screen-language">SIGN IN</button>
 
-        <button class="btn btn-light btn-lg border" data-nav="screen-cash">CASH IN/OUT</button>
+        <!-- CASH IN/OUT ahora tiene id para aplicar la misma validación -->
+        <button id="btn-home-cash" class="btn btn-light btn-lg border" data-nav="screen-cash">CASH IN/OUT</button>
       </div>
       <div class="version">Versión 1.0</div>
     </main>
@@ -52,7 +53,7 @@
       </div>
       <div class="mt-3 d-flex justify-content-between">
         <button class="btn btn-outline-secondary" data-nav="screen-home">&lt; VOLVER</button>
-        <div class="version">Gabriel Arias</div>
+        <div class="version">Versión 1.0</div>
       </div>
     </section>
 
@@ -65,7 +66,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <hr/>
-          <p>Lo sentimos, este idioma aún no está disponible.😓</p>
+          <p>Este idioma aun no está disponible.</p>
           <div class="text-end">
             <button class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
           </div>
@@ -115,7 +116,7 @@
         </div>
       </form>
 
-      <div class="version">Gabriel Arias</div>
+      <div class="version">Versión 1.0</div>
     </section>
 
     <!-- Modal: camera scanning (from signup) -->
@@ -128,9 +129,6 @@
           </div>
           <hr/>
           <p>Cámara activada para escanear documento. (Simulación)</p>
-          <div class="text-center mb-2">
-            <div class="camera-placeholder border rounded p-4">[Vista de cámara simulada]</div>
-          </div>
           <div class="text-end">
             <button class="btn btn-primary" data-bs-dismiss="modal">Escanear y continuar</button>
           </div>
@@ -147,7 +145,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <hr/>
-          <p>Cámara activada para tomar la selfie. (Simulación)</p>
+          <p>Tomá una foto tipo selfie para validar identidad. (Simulación)</p>
           <div class="text-center mb-2">
             <div class="camera-placeholder border rounded p-4">[Vista de cámara simulada]</div>
           </div>
@@ -167,7 +165,7 @@
       <form id="currency-form" class="mt-3">
         <div class="form-check currency-option">
           <input class="form-check-input" type="radio" name="currency" id="currency-usd" value="USD">
-          <label class="form-check-label" for="currency-usd">DOLAR</label>
+          <label class="form-check-label" for="currency-usd">USDOLAR</label>
         </div>
         <div class="form-check currency-option">
           <input class="form-check-input" type="radio" name="currency" id="currency-eur" value="EUR">
@@ -196,7 +194,7 @@
         </div>
       </form>
 
-      <div class="version">Gabriel Arias</div>
+      <div class="version">Versión 1.0</div>
     </section>
 
     <!-- Screen E: signup success -->
@@ -207,7 +205,7 @@
       <div class="mt-4 d-flex justify-content-center">
         <button class="btn btn-outline-secondary" data-nav="screen-home">Cerrar</button>
       </div>
-      <div class="version">Gabriel Arias</div>
+      <div class="version">Versión 1.0</div>
     </section>
 
     <!-- ---------- LOG IN flow & Menu (Imagen 2) ---------- -->
@@ -238,9 +236,27 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <hr/>
-          <p>Debes registraste antes de iniciar sesión.</p>
+          <p>Debes completar el registro antes de iniciar sesión.</p>
           <div class="text-end">
             <!-- Solo botón cerrar, como pediste -->
+            <button class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: cash-warning (si intenta CASH IN/OUT sin haber dado SIGN IN en pantalla A) -->
+    <div class="modal fade" id="modal-cash-warning" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-3">
+          <div class="d-flex justify-content-between align-items-center">
+            <h6 class="m-0">Atención</h6>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <hr/>
+          <p>Primero debes tener una cuenta creada para ingresar o retirar dinero de la aplicación.</p>
+          <div class="text-end">
+            <!-- Solo botón cerrar, según lo solicitado -->
             <button class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
           </div>
         </div>
@@ -263,10 +279,10 @@
       <div class="d-grid gap-2">
         <button class="btn btn-outline-primary" data-nav="screen-map">MAPA DE PROMOCIONES</button>
         <button class="btn btn-outline-primary" data-nav="screen-history">HISTORIAL DE PAGOS</button>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-qr">ESCANER QR</button>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-qr">QR SCANER</button>
       </div>
 
-      <div class="version">Gabriel Arias</div>
+      <div class="version">Versión 1.0</div>
     </section>
 
     <!-- QR modal -->
@@ -274,7 +290,7 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content p-3">
           <div class="d-flex justify-content-between">
-            <h6 class="m-0">ESCANER QR</h6>
+            <h6 class="m-0">QR Scanner</h6>
             <button class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <hr/>
@@ -289,7 +305,7 @@
     <!-- History screen -->
     <section id="screen-history" class="screen p-3">
       <div class="d-flex justify-content-between align-items-center mb-2">
-        <h6>Historial de Movimientos:</h6>
+        <h6>Historial de Movimientos</h6>
         <button class="btn btn-sm btn-light" data-nav="screen-home">X</button>
       </div>
 
@@ -307,7 +323,7 @@
       </div>
 
       <div class="d-grid">
-        <button class="btn btn-outline-secondary" data-nav="screen-login">VOLVER AL INICIO</button>
+        <button class="btn btn-outline-secondary" data-nav="screen-login">RETURN TO MAIN MENU</button>
       </div>
     </section>
 
@@ -353,7 +369,7 @@
         <div class="promo-item">Café: "Las Violetas" — <span class="badge bg-primary">20% OFF</span></div>
       </div>
 
-      <div class="version">Gabriel Arias</div>
+      <div class="version">Versión 1.0</div>
     </section>
 
     <!-- ---------- CASH IN/OUT Flow (Imagen 3) ---------- -->
@@ -367,7 +383,7 @@
         <div><strong>Datos Bancarios:</strong></div>
         <div class="bank-card mt-2 p-2">
           <div><strong>Beneficiary:</strong> Josh Smith</div>
-          <div><strong>Account Number:</strong> XXXXX-XXX</div>
+          <div><strong>Account Number:</strong> XXXXXX</div>
           <div><strong>Country:</strong> Argentina</div>
           <div><strong>Bank Name:</strong> Banco X</div>
           <div><strong>SWIFT Code:</strong> BACOARBA</div>
@@ -376,14 +392,14 @@
       </div>
 
       <div class="mb-3">
-        <div class="mb-2"><small>Para depositar:</small></div>
-        <button class="btn btn-outline-primary mb-2" id="btn-share-details"><i class="fa-solid fa-share-nodes"></i> COMPARTIR DETALLES</button>
+        <div class="mb-2"><small>To deposit money:</small></div>
+        <button class="btn btn-outline-primary mb-2" id="btn-share-details"><i class="fa-solid fa-share-nodes"></i> SHARE DETAILS</button>
 
-        <div class="mt-3"><small>Para retirar:</small></div>
-        <button class="btn btn-outline-danger mt-2" id="btn-rescue-order"><i class="fa-solid fa-hand-holding-dollar"></i> ORDEN DE RESCATE</button>
+        <div class="mt-3"><small>To rescue money:</small></div>
+        <button class="btn btn-outline-danger mt-2" id="btn-rescue-order"><i class="fa-solid fa-hand-holding-dollar"></i> RESCUE ORDER</button>
       </div>
 
-      <div class="version">Gabriel Arias</div>
+      <div class="version">Versión 1.0</div>
     </section>
 
     <!-- Modal: Share details -> simulate downloading PDF -->
@@ -395,7 +411,7 @@
             <button class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <hr/>
-          <p>Descargando PDF con los datos para facilitarle a su banco y fondear la billetera.</p>
+          <p>Descargando PDF con los datos para facilitarle a su banco y fondear su billetera.</p>
           <div class="text-end">
             <button class="btn btn-primary" id="btn-download-pdf">Descargar PDF</button>
           </div>
@@ -408,14 +424,14 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content p-3">
           <div class="d-flex justify-content-between align-items-center">
-            <h6 class="m-0">Orden de Rescate:</h6>
+            <h6 class="m-0">Rescue Order</h6>
             <button class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <hr/>
-          <p>Sus fondos restantes serán transferidos nuevamente a su banco de origen y su cuenta en esta aplicación será dada de baja. ¿Confirma la operación?</p>
+          <p>Sus fondos restantes serán transferidos nuevamente a su banco de origen. ¿Confirmar?</p>
           <div class="d-flex gap-2 justify-content-end">
             <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button class="btn btn-danger" id="confirm-rescue">Confirmar</button>
+            <button class="btn btn-danger" id="confirm-rescue">Confirmar rescate</button>
           </div>
         </div>
       </div>
@@ -427,8 +443,8 @@
           <div class="m-3">
             <i class="fa-solid fa-check-circle fa-3x text-success"></i>
           </div>
-          <h6>Operación realizada:</h6>
-          <p>Sus fondos serán transferidos nuevamente a su banco de origen. Le notificaremos cuando se complete la operación.</p>
+          <h6>Operación realizada</h6>
+          <p>Sus fondos serán transferidos a su banco de origen. Le notificaremos cuando se complete.</p>
           <div><button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button></div>
         </div>
       </div>
@@ -443,7 +459,7 @@
             <button class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <hr/>
-          <p class="small">Sección de términos y condiciones (texto de ejemplo). — Al aceptar, confirma que ha leído y comprende los términos.</p>
+          <p class="small">Aquí van los términos y condiciones (texto de ejemplo) — Al aceptar, confirma que ha leído y comprende los términos.</p>
           <div class="text-end">
             <button class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
           </div>
@@ -458,7 +474,7 @@
   <!-- Bootstrap scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Inline script to handle nav and interactions (actualizado con lógica LOG IN / SIGN IN en pantalla A) -->
+  <!-- Inline script to handle nav and interactions (actualizado con lógica LOG IN / SIGN IN / CASH IN/OUT en pantalla A) -->
   <script>
     // Session flag in-memory (resets on reload)
     let signInInitiated = false;
@@ -483,7 +499,6 @@
       // mark as initiated for this session
       signInInitiated = true;
       // navigation handled by data-nav attribute (click already triggers it)
-      // ensure we still navigate (in case bootstrap prevented default)
       const target = e.currentTarget.getAttribute('data-nav');
       if (target) {
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -501,6 +516,20 @@
         // open warning modal (solo en pantalla A)
         const warning = new bootstrap.Modal(document.getElementById('modal-login-warning'));
         warning.show();
+      }
+    });
+
+    // CASH IN/OUT button on home: if signInInitiated -> navigate to screen-cash, else show cash-warning modal
+    document.getElementById('btn-home-cash')?.addEventListener('click', (e) => {
+      if (signInInitiated) {
+        // Navigate to screen-cash (same as data-nav behavior)
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('screen-cash').classList.add('active');
+        // close any modals
+        document.querySelectorAll('.modal.show').forEach(m => bootstrap.Modal.getInstance(m)?.hide());
+      } else {
+        const cashWarning = new bootstrap.Modal(document.getElementById('modal-cash-warning'));
+        cashWarning.show();
       }
     });
 
@@ -604,5 +633,3 @@
   </script>
 </body>
 </html>
-
-
