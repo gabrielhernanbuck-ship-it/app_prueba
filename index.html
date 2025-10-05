@@ -260,7 +260,7 @@
           <p>Primero debes tener una cuenta creada para ingresar o retirar dinero de la aplicación.</p>
           <div class="text-end">
             <!-- Solo botón cerrar, según lo solicitado -->
-            <button class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary" id="continuarCashBtn">Regresar</button>
           </div>
         </div>
       </div>
@@ -529,18 +529,28 @@
     });
 
     // CASH IN/OUT button on home: if signInInitiated -> navigate to screen-cash, else show cash-warning modal
-    document.getElementById('btn-home-cash')?.addEventListener('click', (e) => {
-      if (signInInitiated) {
-        // Navigate to screen-cash (same as data-nav behavior)
-        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-        document.getElementById('screen-cash').classList.add('active');
-        // close any modals
-        document.querySelectorAll('.modal.show').forEach(m => bootstrap.Modal.getInstance(m)?.hide());
+    // Siempre abre el modal, pero controla si el botón "Continuar" está habilitado
+    document.getElementById("cashInOutBtn").addEventListener("click", function () {
+      let modal = new bootstrap.Modal(document.getElementById("cashModal"));
+      modal.show();
+    
+      const continuarBtn = document.getElementById("continuarCashBtn");
+      if (!hasSignedIn) {
+        continuarBtn.disabled = true;
+        continuarBtn.title = "Primero debes crear una cuenta para ingresar o retirar dinero.";
       } else {
-        const cashWarning = new bootstrap.Modal(document.getElementById('modal-cash-warning'));
-        cashWarning.show();
+        continuarBtn.disabled = false;
+        continuarBtn.title = "";
       }
     });
+    
+    // Si hizo clic en SIGN IN, permitir avanzar al CASH
+    document.getElementById("continuarCashBtn").addEventListener("click", function () {
+      if (hasSignedIn) {
+        window.location.href = "#pantallaCash";
+      }
+    });
+
 
     // on login proceed: close modal and open screen-login
     document.getElementById('btn-login-proceed')?.addEventListener('click', () => {
@@ -642,5 +652,6 @@
   </script>
 </body>
 </html>
+
 
 
