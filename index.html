@@ -31,8 +31,8 @@
         <!-- SIGN IN: abre pantalla de idioma (Pantalla B) y marca que se inició sign in -->
         <button id="btn-signin-home" class="btn btn-light btn-lg border" data-nav="screen-language">SIGN IN</button>
 
-        <!-- CASH IN/OUT ahora tiene id para aplicar la validación -->
-        <button id="btn-home-cash" class="btn btn-light btn-lg border" data-nav="screen-cash">CASH IN/OUT</button>
+        <!-- CASH IN/OUT ahora SIN data-nav (para controlar navegación desde JS) -->
+        <button id="btn-home-cash" class="btn btn-light btn-lg border">CASH IN/OUT</button>
       </div>
       <div class="version">Versión 1.0</div>
     </main>
@@ -246,7 +246,7 @@
     </div>
 
     <!-- Modal: cash-warning (si intenta CASH IN/OUT sin haber dado SIGN IN en pantalla A) -->
-    <!-- Nota: ahora el modal tiene un botón "Continuar" que estará disabled hasta hacer SIGN IN -->
+    <!-- Nota: ahora el modal solo contiene el mensaje y UN botón "Cerrar" -->
     <div class="modal fade" id="modal-cash-warning" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content p-3">
@@ -256,11 +256,9 @@
           </div>
           <hr/>
           <p>Primero debes tener una cuenta creada para ingresar o retirar dinero de la aplicación.</p>
-          <div class="text-end d-flex justify-content-end gap-2">
-            <!-- Cerrar siempre disponible -->
-            <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <!-- Continuar: estará deshabilitado hasta que signInInitiated = true -->
-            <button class="btn btn-primary" id="btn-cash-continue">Continuar</button>
+          <div class="text-end">
+            <!-- Solo botón cerrar -->
+            <button class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
           </div>
         </div>
       </div>
@@ -479,15 +477,16 @@
 
   <!-- Inline script to handle nav and interactions (actualizado con lógica LOG IN / SIGN IN / CASH IN/OUT en pantalla A)
        Cambios principales:
-       - btn-home-cash ahora abre modal-cash-warning siempre.
-       - btn-cash-continue (dentro del modal) solo permite avanzar si signInInitiated === true.
-       - btn-signin-home pone signInInitiated = true y habilita el botón continuar cuando corresponda.
+       - btn-home-cash ahora NO tiene data-nav; la navegación se controla desde aquí:
+         * si signInInitiated === true -> navega a screen-cash
+         * si signInInitiated === false -> abre modal-cash-warning y NO permite avanzar
+       - Eliminé el botón "Continuar" del modal de cash-warning y la lógica asociada.
   -->
   <script>
     // Session flag in-memory (resets on reload)
     let signInInitiated = false;
 
-    // Navigation between sections (screens)
+    // Navigation between sections (screens) via data-nav attributes
     document.querySelectorAll('[data-nav]').forEach(btn => {
       btn.addEventListener('click', (e) => {
         const target = btn.getAttribute('data-nav');
@@ -512,12 +511,7 @@
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
         document.getElementById(target).classList.add('active');
       }
-      // If the cash modal is open and continue button exists, enable it
-      const cashContinue = document.getElementById('btn-cash-continue');
-      if (cashContinue) {
-        cashContinue.disabled = false;
-        cashContinue.removeAttribute('title');
-      }
+      // nothing else to do (no continue button in cash modal)
     });
 
     // LOG IN button on home: if signInInitiated -> open login modal, else show warning modal
@@ -534,36 +528,20 @@
     });
 
     // CASH IN/OUT button on home:
-    // Now: ALWAYS open the cash-warning modal.
-    // The "Continuar" button inside the modal will be disabled until signInInitiated === true.
+    // Behavior desired: open modal (if NOT signInInitiated) and do NOT advance.
+    // If signInInitiated is true, then navigate to screen-cash.
     document.getElementById('btn-home-cash')?.addEventListener('click', (e) => {
-      // Always show the cash-warning modal (doesn't navigate immediately)
-      const cashWarningModalEl = document.getElementById('modal-cash-warning');
-      const cashWarning = new bootstrap.Modal(cashWarningModalEl);
-      // Ensure continue button state reflects signInInitiated
-      const cashContinue = document.getElementById('btn-cash-continue');
-      if (cashContinue) {
-        if (!signInInitiated) {
-          cashContinue.disabled = true;
-          cashContinue.title = "Primero debes crear una cuenta para ingresar o retirar dinero.";
-        } else {
-          cashContinue.disabled = false;
-          cashContinue.removeAttribute('title');
-        }
+      if (signInInitiated) {
+        // Navigate to screen-cash
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('screen-cash').classList.add('active');
+        // close any open modals
+        document.querySelectorAll('.modal.show').forEach(m => bootstrap.Modal.getInstance(m)?.hide());
+      } else {
+        // Show warning modal and do NOT navigate
+        const cashWarning = new bootstrap.Modal(document.getElementById('modal-cash-warning'));
+        cashWarning.show();
       }
-      cashWarning.show();
-    });
-
-    // btn-cash-continue: avanza a la pantalla cash solo si signInInitiated === true
-    document.getElementById('btn-cash-continue')?.addEventListener('click', () => {
-      if (!signInInitiated) {
-        // Shouldn't happen because button is disabled, but guard anyway
-        return;
-      }
-      // Close the modal and navigate to screen-cash
-      bootstrap.Modal.getInstance(document.getElementById('modal-cash-warning'))?.hide();
-      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-      document.getElementById('screen-cash').classList.add('active');
     });
 
     // on login proceed: close modal and open screen-login
@@ -662,13 +640,6 @@
       document.getElementById('screen-home').classList.add('active');
       // ensure session flag starts false (resets on reload)
       signInInitiated = false;
-
-      // Ensure cash continue button is disabled on fresh load
-      const cashContinue = document.getElementById('btn-cash-continue');
-      if (cashContinue) {
-        cashContinue.disabled = true;
-        cashContinue.title = "Primero debes crear una cuenta para ingresar o retirar dinero.";
-      }
     });
   </script>
 </body>
