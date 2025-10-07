@@ -519,16 +519,20 @@
       }
     });
 
-    // CASH IN/OUT button on home: if signInInitiated -> navigate to screen-cash, else show cash-warning modal
-    document.getElementById('btn-home-login')?.addEventListener('click', (e) => {
+    // CASH IN/OUT button on home:
+    // Behavior desired: open modal (if NOT signInInitiated) and do NOT advance.
+    // If signInInitiated is true, then navigate to screen-cash.
+    document.getElementById('btn-home-cash')?.addEventListener('click', (e) => {
       if (signInInitiated) {
-        // open login modal
-        const m = new bootstrap.Modal(document.getElementById('modal-login'));
-        m.show();
+        // Navigate to screen-cash
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('screen-cash').classList.add('active');
+        // close any open modals
+        document.querySelectorAll('.modal.show').forEach(m => bootstrap.Modal.getInstance(m)?.hide());
       } else {
-        // open warning modal (solo en pantalla A)
-        const warning = new bootstrap.Modal(document.getElementById('modal-login-warning'));
-        warning.show();
+        // Show warning modal and do NOT navigate
+        const cashWarning = new bootstrap.Modal(document.getElementById('modal-cash-warning'));
+        cashWarning.show();
       }
     });
 
@@ -632,5 +636,6 @@
   </script>
 </body>
 </html>
+
 
 
