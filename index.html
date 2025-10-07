@@ -522,14 +522,13 @@
     // CASH IN/OUT button on home: if signInInitiated -> navigate to screen-cash, else show cash-warning modal
     document.getElementById('btn-home-cash')?.addEventListener('click', (e) => {
       if (signInInitiated) {
-        // Navigate to screen-cash (same as data-nav behavior)
-        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-        document.getElementById('screen-cash').classList.add('active');
-        // close any modals
-        document.querySelectorAll('.modal.show').forEach(m => bootstrap.Modal.getInstance(m)?.hide());
+        // open login modal
+        const m = new bootstrap.Modal(document.getElementById('modal-login'));
+        m.show();
       } else {
-        const cashWarning = new bootstrap.Modal(document.getElementById('modal-cash-warning'));
-        cashWarning.show();
+        // open warning modal (solo en pantalla A)
+        const warning = new bootstrap.Modal(document.getElementById('modal-login-warning'));
+        warning.show();
       }
     });
 
@@ -633,3 +632,4 @@
   </script>
 </body>
 </html>
+
