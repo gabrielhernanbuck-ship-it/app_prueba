@@ -34,7 +34,7 @@
         <!-- CASH IN/OUT ahora tiene id para aplicar la misma validación -->
         <button id="btn-home-cash" class="btn btn-light btn-lg border" data-nav="screen-cash">CASH IN/OUT</button>
       </div>
-      <div class="version">Versión 1.0</div>
+      <div class="version">Gabriel Arias</div>
     </main>
 
     <!-- ---------- SING IN Flow (Imagen 1) ---------- -->
@@ -53,7 +53,7 @@
       </div>
       <div class="mt-3 d-flex justify-content-between">
         <button class="btn btn-outline-secondary" data-nav="screen-home">&lt; VOLVER</button>
-        <div class="version">Versión 1.0</div>
+        <div class="version">Gabriel Arias</div>
       </div>
     </section>
 
@@ -66,7 +66,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <hr/>
-          <p>Este idioma aun no está disponible.</p>
+          <p>Este idioma aún no está disponible para la prueba. 😓</p>
           <div class="text-end">
             <button class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
           </div>
@@ -116,7 +116,7 @@
         </div>
       </form>
 
-      <div class="version">Versión 1.0</div>
+      <div class="version">Gabriel Arias</div>
     </section>
 
     <!-- Modal: camera scanning (from signup) -->
@@ -128,7 +128,10 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <hr/>
-          <p>Cámara activada para escanear documento. (Simulación)</p>
+          <p>Cámara activada para escanear tu pasaporte o documento de identidad.</p>
+          <div class="text-center mb-2">
+            <div class="camera-placeholder border rounded p-4">[Vista de cámara simulada]</div>
+          </div>
           <div class="text-end">
             <button class="btn btn-primary" data-bs-dismiss="modal">Escanear y continuar</button>
           </div>
@@ -145,7 +148,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <hr/>
-          <p>Tomá una foto tipo selfie para validar identidad. (Simulación)</p>
+          <p>Cámara activada para tomar una selfie para validar identidad.</p>
           <div class="text-center mb-2">
             <div class="camera-placeholder border rounded p-4">[Vista de cámara simulada]</div>
           </div>
@@ -159,13 +162,13 @@
 
     <!-- Screen D: currency and dates, terms (AHORA CON RADIOS) -->
     <section id="screen-signup-selfie" class="screen p-3">
-      <h5 class="text-center">Elija la moneda con la que operará:</h5>
+      <h5 class="text-center">Elija la moneda con la que va a fondear la billetera:</h5>
 
       <!-- Radios para seleccionar una opción (solo uno) -->
       <form id="currency-form" class="mt-3">
         <div class="form-check currency-option">
           <input class="form-check-input" type="radio" name="currency" id="currency-usd" value="USD">
-          <label class="form-check-label" for="currency-usd">USDOLAR</label>
+          <label class="form-check-label" for="currency-usd">DOLAR</label>
         </div>
         <div class="form-check currency-option">
           <input class="form-check-input" type="radio" name="currency" id="currency-eur" value="EUR">
@@ -173,7 +176,7 @@
         </div>
 
         <div class="mt-3">
-          <label>Ingrese fecha de ingreso y salida:</label>
+          <label>Ingrese fecha de ingreso y salida de la Argentina:</label>
           <div class="d-flex gap-2">
             <input required type="date" class="form-control" id="date-in">
             <input required type="date" class="form-control" id="date-out">
@@ -194,7 +197,7 @@
         </div>
       </form>
 
-      <div class="version">Versión 1.0</div>
+      <div class="version">Gabriel Arias</div>
     </section>
 
     <!-- Screen E: signup success -->
@@ -205,7 +208,7 @@
       <div class="mt-4 d-flex justify-content-center">
         <button class="btn btn-outline-secondary" data-nav="screen-home">Cerrar</button>
       </div>
-      <div class="version">Versión 1.0</div>
+      <div class="version">Gabriel Arias</div>
     </section>
 
     <!-- ---------- LOG IN flow & Menu (Imagen 2) ---------- -->
@@ -232,11 +235,11 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content p-3">
           <div class="d-flex justify-content-between align-items-center">
-            <h6 class="m-0">Atención</h6>
+            <h6 class="m-0">Atención:</h6>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <hr/>
-          <p>Debes completar el registro antes de iniciar sesión.</p>
+          <p>Para iniciar sesión, primero tenés que crear una cuenta. Hacelo desde el botón "LOG IN".</p>
           <div class="text-end">
             <!-- Solo botón cerrar, como pediste -->
             <button class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
@@ -254,7 +257,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <hr/>
-          <p>Primero debes tener una cuenta creada para ingresar o retirar dinero de la aplicación.</p>
+          <p>Primero tenés que tener una cuenta creada para ingresar o retirar dinero de la aplicación.</p>
           <div class="text-end">
             <!-- Solo botón cerrar, según lo solicitado -->
             <button class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
@@ -271,9 +274,9 @@
       </div>
 
       <div class="balance text-center mb-3">
-        <div class="small">Balance de Cuenta</div>
-        <div class="h3 mb-0">USD 500.00</div>
-        <div class="small text-muted">ARS 685,000.00</div>
+        <div class="small">Balance de Cuenta:</div>
+        <div class="h3 mb-0">USD 500</div>
+        <div class="small text-muted">ARS 700.000</div>
       </div>
 
       <div class="d-grid gap-2">
@@ -282,7 +285,7 @@
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-qr">QR SCANER</button>
       </div>
 
-      <div class="version">Versión 1.0</div>
+      <div class="version">Gabriel Arias</div>
     </section>
 
     <!-- QR modal -->
@@ -290,11 +293,14 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content p-3">
           <div class="d-flex justify-content-between">
-            <h6 class="m-0">QR Scanner</h6>
+            <h6 class="m-0">Escaner QR</h6>
             <button class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <hr/>
-          <p>Cámara activada para escanear QR. (Simulación)</p>
+          <p>Cámara activada para escanear QR.</p>
+          <div class="text-center mb-2">
+            <div class="camera-placeholder border rounded p-4">[Vista de cámara simulada]</div>
+          </div>
           <div class="text-end">
             <button class="btn btn-primary" data-bs-dismiss="modal">Simular escaneo</button>
           </div>
@@ -305,25 +311,30 @@
     <!-- History screen -->
     <section id="screen-history" class="screen p-3">
       <div class="d-flex justify-content-between align-items-center mb-2">
-        <h6>Historial de Movimientos</h6>
+        <h6>Historial de Movimientos:</h6>
         <button class="btn btn-sm btn-light" data-nav="screen-home">X</button>
       </div>
 
       <div class="history-box p-2 mb-3">
         <div class="history-entry">
-          <div><small>17/08/2025 - Debit</small></div>
-          <div class="fw-bold">ARS 200.00</div>
-          <div>USD 22.67 <i class="fa-solid fa-question-circle text-muted"></i></div>
+          <div><small>03/10/2025 - Débito</small></div>
+          <div class="fw-bold">ARS 40,000</div>
+          <div>USD 29.14 <i class="fa-solid fa-question-circle text-muted"></i></div>
         </div>
         <div class="history-entry">
-          <div><small>15/08/2025 - Debit</small></div>
-          <div class="fw-bold">ARS 300.00</div>
-          <div>USD 37.78 <i class="fa-solid fa-question-circle text-muted"></i></div>
+          <div><small>03/10/2025 - Débito</small></div>
+          <div class="fw-bold">ARS 55,000</div>
+          <div>USD 40.07 <i class="fa-solid fa-question-circle text-muted"></i></div>
+        </div>
+        <div class="history-entry">
+          <div><small>02/10/2025 - Débito</small></div>
+          <div class="fw-bold">ARS 100,000</div>
+          <div>USD 72.86 <i class="fa-solid fa-question-circle text-muted"></i></div>
         </div>
       </div>
 
       <div class="d-grid">
-        <button class="btn btn-outline-secondary" data-nav="screen-login">RETURN TO MAIN MENU</button>
+        <button class="btn btn-outline-secondary" data-nav="screen-login">VOLVER AL INICIO</button>
       </div>
     </section>
 
@@ -358,7 +369,7 @@
       </div>
 
       <div id="pin-info" class="card p-2 mb-2">
-        <strong>Seleccioná un punto en el mapa</strong>
+        <strong>Seleccioná un punto en el mapa:</strong>
         <div id="pin-details" class="small text-muted mt-1">Aquí aparecerá la tarjeta con el descuento al tocar un pin.</div>
       </div>
 
@@ -369,7 +380,7 @@
         <div class="promo-item">Café: "Las Violetas" — <span class="badge bg-primary">20% OFF</span></div>
       </div>
 
-      <div class="version">Versión 1.0</div>
+      <div class="version">Gabriel Arias</div>
     </section>
 
     <!-- ---------- CASH IN/OUT Flow (Imagen 3) ---------- -->
@@ -382,8 +393,8 @@
       <div class="card p-2 mb-3">
         <div><strong>Datos Bancarios:</strong></div>
         <div class="bank-card mt-2 p-2">
-          <div><strong>Beneficiary:</strong> Josh Smith</div>
-          <div><strong>Account Number:</strong> XXXXXX</div>
+          <div><strong>Beneficiary:</strong> Nombre del usuario</div>
+          <div><strong>Account Number:</strong> XXXXX-XXX</div>
           <div><strong>Country:</strong> Argentina</div>
           <div><strong>Bank Name:</strong> Banco X</div>
           <div><strong>SWIFT Code:</strong> BACOARBA</div>
@@ -392,14 +403,14 @@
       </div>
 
       <div class="mb-3">
-        <div class="mb-2"><small>To deposit money:</small></div>
-        <button class="btn btn-outline-primary mb-2" id="btn-share-details"><i class="fa-solid fa-share-nodes"></i> SHARE DETAILS</button>
+        <div class="mb-2"><small>Para depositar:</small></div>
+        <button class="btn btn-outline-primary mb-2" id="btn-share-details"><i class="fa-solid fa-share-nodes"></i> COMPARTIR DETALLES</button>
 
-        <div class="mt-3"><small>To rescue money:</small></div>
-        <button class="btn btn-outline-danger mt-2" id="btn-rescue-order"><i class="fa-solid fa-hand-holding-dollar"></i> RESCUE ORDER</button>
+        <div class="mt-3"><small>Para rescatar:</small></div>
+        <button class="btn btn-outline-danger mt-2" id="btn-rescue-order"><i class="fa-solid fa-hand-holding-dollar"></i> ORDEN DE RESCATE</button>
       </div>
 
-      <div class="version">Versión 1.0</div>
+      <div class="version">Gabriel Arias</div>
     </section>
 
     <!-- Modal: Share details -> simulate downloading PDF -->
@@ -424,11 +435,11 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content p-3">
           <div class="d-flex justify-content-between align-items-center">
-            <h6 class="m-0">Rescue Order</h6>
+            <h6 class="m-0">Orden de Rescate</h6>
             <button class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <hr/>
-          <p>Sus fondos restantes serán transferidos nuevamente a su banco de origen. ¿Confirmar?</p>
+          <p>Sus fondos restantes serán transferidos nuevamente a su banco de origen y su cuenta en esta aplicación será eliminada. ¿Desea confirmar?</p>
           <div class="d-flex gap-2 justify-content-end">
             <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
             <button class="btn btn-danger" id="confirm-rescue">Confirmar rescate</button>
@@ -459,7 +470,7 @@
             <button class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <hr/>
-          <p class="small">Aquí van los términos y condiciones (texto de ejemplo) — Al aceptar, confirma que ha leído y comprende los términos.</p>
+          <p class="small">Texto con los términos y condiciones (texto de ejemplo). — Al aceptar, confirma que ha leído y comprende los términos.</p>
           <div class="text-end">
             <button class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
           </div>
@@ -633,3 +644,4 @@
   </script>
 </body>
 </html>
+
