@@ -520,7 +520,7 @@
     });
 
     // CASH IN/OUT button on home: if signInInitiated -> navigate to screen-cash, else show cash-warning modal
-    document.getElementById('btn-home-cash')?.addEventListener('click', (e) => {
+    document.getElementById('btn-home-login')?.addEventListener('click', (e) => {
       if (signInInitiated) {
         // open login modal
         const m = new bootstrap.Modal(document.getElementById('modal-login'));
@@ -632,4 +632,5 @@
   </script>
 </body>
 </html>
+
 
